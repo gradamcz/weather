@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>GraTech Weather</title>
+<!-- Mobile Specific Metas ===================== -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+<!-- CSS ==================================== -->
+    <link href="https://www.pgscweb.com/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="https://www.pgscweb.com/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="https://www.pgscweb.com/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="https://www.pgscweb.com/Weather-Main-192x192.png" rel="icon" sizes="192x192" type="image/png">
+    <link href="manifestweather.json" rel="manifest">
+    <link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon">
+    <meta content="#da532c" name="msapplication-TileColor">
+    <meta content="#fffff" name="theme-color">
+	<meta property="og:title" content="Punta Gorda Sailing Club">
+    <meta property="og:description" content="Punta Gorda Sailing Club Weather">
+    <meta property="og:image" content="https://www.pgscweb.com/images/PGSC%20Logos/PGSC%20Logo%20V3.png">
+
+    <meta name="description" content="Get the latest boating weather, tides, and sea conditions for Charlotte Harbor and the Florida Gulf Coast. Stay informed and safe on the water.">    <meta content="George A" name="author">
+    <meta name="dcterms.title" content="Boating Weather for Charlotte Harbor & Gulf">
+    <meta name="dcterms.description" content="Get the latest boating weather, tides, and sea conditions for Charlotte Harbor and the Florida Gulf Coast.">
+    <meta name="dcterms.created" content="2024-09-07">
+    <meta content="GRATech North Port, FL" name="designer">
+<!--     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">	 -->    <link href="css/maincommon.min.css" rel="stylesheet">
+    <link href="css/weather.css" rel="stylesheet">
+    <!-- Cache control for CSS/JS -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, public">
+
+    <script src="https://cdnres.willyweather.com/widget/warning/loadView.html?id=87399" ></script>
+	<!-- https://cdnres.willyweather.com/widget/warning/loadView.html?id=154713 -->
+  </head>
+  <body>
+ <div class="title">Boating Weather</div> 
+    <noscript>
+      <div style="font-weight: bold; background-color:#FFFFFF; color:#FF0000; font-size:25px; width:100%; text-align: center;">Your browser does not support JavaScript. Please enable it to see the website correctly.</div>
+    </noscript>
+    <div class="flex-container">
+
+      <!-- Use a button to open the ModalNotice -->
+
+      <!-- The actual ModalNotice -->
+      <div id="ModalNotice">
+        <b>Do you find our site useful? We don't hide our data like other clubs do. Please consider joining our boating club or making a donation. Initial Membership Dues: $65 includes you & significant other.
+          Renewal dues $50.</b><br>
+        <a class="button" href="https://drive.google.com/file/d/0BwL_vynlWj_BVDZNOVVfVGtfc3VlbTZDSzZDSnRoQndHbEw0/view?usp=sharing" title="Click to get membership form">J O I N</a>&nbsp;&nbsp;&nbsp; <a class="button" onclick="myFunction1()" href="#" title="Close popup">ALREADY A MEMBER</a>
+      <button id="install-button-main" class="install-button">Install Weather App</button>
+	  </div>
+
+        <div class='item1'>
+        <b>Today is:
+		<script>
+		const weekday = ["Sunday ","Monday ","Tuesday ","Wednesday ","Thursday ","Friday ","Saturday "];
+        const d = new Date();
+        let day = weekday[d.getDay()];
+        document.write(day);
+		date = new Date().toLocaleDateString();
+        document.write(date);
+        </script></b>
+
+        <iframe style="display: block;border:none;overflow:hidden;" sandbox="allow-scripts" height="228" src="https://cdnres.willyweather.com/widget/loadView.html?id=121564" width="370"></iframe><a href="https://www.willyweather.com/fl/charlotte-county/charlotte-harbor--gilchrist-bridge.html" rel="nofollow" style="height: 20px;position: relative;display: block;margin: -20px 0 0 0;text-indent: -9999em;z-index: 1">Up to date weather for Charlotte
+          Harbor-Gilchrist Bridge</a> <a href="https://time.is/Port_Charlotte" id="time_is_link" rel="nofollow" style="font-size:18px;color:black">EDT:</a> <span id="Port_Charlotte_z161" style="font-size:16px;color:black;font-weight: bold"></span>
+        <script src="https://widget.time.is/en.js"></script>
+        <script>
+          time_is_widget.init({
+            Port_Charlotte_z161: {
+              template: "SUN",
+              sun_format: "Sunrise: srhour:srminute AM Sunset: ss12hour:ssminute PM",
+              coords: "26.9761700,-82.0906400"
+            }
+          });
+        </script>
+      </div>
+      <div class='item2'>
+        <div title="Links below in this box open a new tab or window">
+          <img alt="NOAA LOGO" src="images/noaa_logo.png" style="width: 30px;">
+          <a class="button" href="https://tgftp.nws.noaa.gov/data/forecasts/marine/coastal/gm/gmz836.txt" rel="noopener" target="_blank" title="Click will open in page">Charlotte Hrbr Forecast</a>
+          <a class="button" href="https://bit.ly/NOAAHrly" rel="noopener" target="_blank" title="Click will open in page">Hourly</a> 
+          <a class="button" href="https://bit.ly/NOAAMarineF" rel="noopener" target="_blank" title="Marine Forecast">Marine Forecast</a> 
+          <a class="button" href="https://tgftp.nws.noaa.gov/data/raw/wh/whus42.ktbw.cfw.tbw.txt" rel="noopener" target="_blank" title="Marine ">Hazardous Outlook</a>
+          <a class="button" href="https://marine.weather.gov/MapClick.php?lon=-82.116&lat=26.85" rel="noopener" target="_blank" title="Planning a boating trip interface">Local</a>
+          <div id="modal-content">
+            <button id="modal-close">- </button>
+            <h1>Boating weather info
+              for Charlotte Harbor and Southwest Florida.
+              Tides, NOAA forecast and local marine weather,
+              Wind Predictions,
+              Real Time Wind,
+              Hurricane Prediction,
+              Weather Radars local doppler & satellite images</h1>
+          </div>
+          <hr>
+          <a href="https://www.youtube.com/embed/a2Me0Q5mj04?autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Fishermans Village & WINK" width="48"></a>         
+          <a href="https://www.youtube.com/embed/CSeud5InOAI?autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Cape Weather" width="48"></a>         
+<!--      <a href="https://www.youtube.com/embed/bfmpKttSAHw?autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokelia Thank you Cape Weather!" width="48"></a>          
+		            <a href="https://www.ipcamlive.com/5d42fff5d1dab" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Webcam King Fisher Fleet, Punta Gorda, FL" width="48"></a>
+<a href="GasparillaWebcam.htm" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Gasparilla!" width="48"></a>--> 
+          <a href="coastguardrss.htm" rel="noopener"  target="_blank"><img alt="" src="images/small/Coast_Guard.png" style="margin-right:5px;" title="Coaast Guard ALERTS" width="48"></a>
+          <a href="bridge.htm" rel="noopener"  target="_blank"><img alt="" src="images/bridge-48.png" style="margin-right:5px;" title="BRIDGE Openings, FUEL" width="48"></a>
+          <a href="https://www.marinetraffic.com/en/ais/home/centerx:-82.0/centery:26.8/zoom:9" rel="noopener"  target="_blank"><img alt="" src="images/boat-48.png" style="margin-right:5px;" title="Boat TRAFFIC" width="48"></a>
+          <a href="https://map.blitzortung.org/#6.12/27.051/-82.041" rel="noopener"  target="_blank"><img alt="" src="images/Animated-lightningT.gif" style="margin-right:5px;" title="LIGHTNING Forecast" width="48"></a>
+          <a href="https://www.wunderground.com/precipitation/us/fl/punta-gorda/KFLPUNTA410?cm_ven=localwx_precip" rel="noopener"  target="_blank"><img alt="" src="images/Animated-rainT.gif" style="margin-right:5px;" title="RAIN Forecast" width="48"></a>
+          <a href="https://www.buoyweather.com/#7.18/26.63/-82.35/SWELL" rel="noopener"  target="_blank"><img alt="" src="images/Animated-Waves.gif" style="margin-right:5px;" title="Waves Forecast" width="48"></a>
+          <hr>
+          <a class="button" href="https://embed.windy.com/embed2.html?lat=26.813&lon=-82.114&detailLat=37.751&detailLon=-97.822&width=650&height=450&zoom=8&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0F&radarRange=-1" rel="noopener" target="_blank" title="WINDY Animated Wind">Wind</a> 
+          <a class="button" href="https://www.ventusky.com/?p=26.92;-82.49;7&l=radar" rel="noopener" target="_blank" title="Animated Radar">Radar</a> 
+		  <a class="button" href="https://www.wunderground.com/hourly/us/fl/punta-gorda/KFLPUNTA410" rel="noopener" target="_blank" title="Sailing weather">PuntaGorda</a> 
+		  <a class="button" href="https://www.wunderground.com/hourly/us/fl/pineland/KFLPINEL23" rel="noopener" target="_blank" title="Sailing weather">PelicanBay</a> 
+		  <a class="button" href="https://www.wunderground.com/hourly/us/fl/englewood/KFLENGLE141" rel="noopener" target="_blank" title="Sailing weather">LemonBay</a>
+          <hr>
+
+          <!-- <a class="button" href="https://bit.ly/TideMonthly" rel="noopener" target="_blank" title="Graph Tide charts for all months">Graphs</a> --> 
+		  <a class="button" href="https://bit.ly/ChHrbrTide" rel="noopener" target="_blank" title="click to open tide chart for today">Today</a>
+          <a class="button" href="https://bit.ly/FtMyerTide" rel="noopener" target="_blank" title="Fort Myers, Caloosahatchee River">Ft Myers
+            Tide</a> <a class="button" href="https://www.marvsweather.com/buoy" rel="noopener" target="_blank" title="Forecast Courtesy of Marv, sign up for his reports">Marvs</a> 
+		  <a class="button" href="https://www.passageweather.com/maps/florida/m_region.htm" rel="noopener" target="_blank" title="PAssage Weather mobile">Passage
+            Wthr</a>
+          <a class="button" href="https://myfwc.maps.arcgis.com/apps/View/index.html?appid=87162eec3eb846218cec711d16462a72" rel="noopener" target="_blank" title="Red Tide">Red Tide</a>
+          <a class="button" href="https://habforecast.gcoos.org/" rel="noopener" target="_blank" title="Red Tide">Red Tide #2</a>
+<!--            <a class="button" href="http://www.findu.com/cgi-bin/twp67.cgi?call=FW1721&units=nautical&led=0&fcolor=&bgcolor=&rcolor=&acolor=0,0,0&led=0&notext=1" title="Courtesy of PGBA Peace River Marker 4" target="_blank" rel="noopener">Mrk 4</a>
+         <a class="button" href="http://www.findu.com/cgi-bin/twp67.cgi?call=GW1876&units=nautical&led=0&fcolor=&bgcolor=&rcolor=&acolor=0,0,0&led=0&notext=1" title="Courtesy of PGBA Peace River Marker 2" target="_blank" rel="noopener">Mrk 2</a>
+          <a class="button" href="http://pgscweather.atwebpages.com/Marker2-4weather.html" title="Courtesy of PGBA Peace River Marker 2 & 4" target="_blank" rel="noopener">Mrks 2&4</a> -->        </div>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class='item3'>
+<!--         <iframe sandbox="allow-scripts allow-same-origin allow-popups" height="320" id="Frame1" name="Frame1" src="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=572317&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=CH Marker 2&activity=Sail&app=sailflow" width="618" style="border:none;"></iframe> -->
+        <iframe sandbox="allow-scripts allow-same-origin allow-popups" height="320" id="Frame1" name="Frame1" src="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=20123&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=CHYC&activity=Sail&app=sailflow" width="618" style="border:none;"></iframe>
+        <form id="change2" name="change2">
+          <select class="soflow" name="options" onchange="document.getElementById('Frame1').src = this.options[this.selectedIndex].value" title="Click for location dropdown menu">
+            <option title="Thank you Sailflow! " value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=20123&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=CHYC&activity=Sail&app=sailflow">
+              Select Location....
+            </option>
+            <option title="Thank you Sailflow! " value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=1744&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Clearwater Beach&activity=Sail&app=sailflow">
+              **Sailflow Clearwater Beach
+            </option>
+            <option title="Thank you Sailflow! " value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=153571&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Gulfport&activity=Sail&app=sailflow">
+              Gulfport
+            </option>
+            <option title="Thank you Sailflow! " value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=120587&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Middle Tampa Bay&activity=Sail&app=sailflow">
+              Tampa Bay
+            </option>
+            <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=113540&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Little Sarasota Bay&activity=Sail&app=sailflow">
+              Little Sarasota Bay
+            </option>
+<!--             <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=572317&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=CH Marker 2&activity=Sail&app=sailflow">
+              Charlotte Harbor Mrk 2
+            </option>
+            <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=187112&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=CH Marker 4&activity=Sail&app=sailflow">
+              Charlotte Harbor Mrk 4
+            </option> -->
+            <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=20123&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Charlotte Harbor CHYC&activity=Sail&app=sailflow">
+              Charlotte Harbor CHYC
+            </option>
+<!--             <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=168703&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Useppa Island&activity=Sail&app=sailflow">
+              Useppa Island
+            </option> -->
+            <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=100873&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Red Fish Pass&activity=Sail&app=sailflow">
+              Red Fish Pass
+            </option>
+            <option title="Thank you Sailflow!" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=20124&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Tarpon Point&activity=Sail&app=sailflow">
+              Tarpon Point
+            </option>
+            <option title="Wind Forecast 100874 " value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=100874&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Gulf of Mexico&activity=Sail&app=sailflow">
+              Gulf of Mexico
+            </option>
+            <option title="Wind Forecast 10256" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=10256&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Fort Myers&activity=Sail&app=sailflow">
+              Fort Myers
+            </option>
+            <option title="Wind Forecast 27043" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=27043&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Naples&activity=Sail&app=sailflow">
+              Naples
+            </option>
+            <option title="Wind Forecast 158294" value="https://widgets.sailflow.com/widgets/web/modelTable?spot_id=158294&units_wind=kts&units_temp=F&type=extended&width=618&height=300&color=ACACAC&name=Marco&activity=Sail&app=sailflow">
+              Marco
+            </option>
+            <option title="Thank you Windfinder!" value="https://www.windfinder.com/widget/forecast/egmont-channel-entrance?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              **Windfinder** Egmont Channel
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/clearwater_beach?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Clearwater Beach
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/anna-maria-island_bay-haven?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Anna Maria Isl
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/city_island_lido_shores?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              City Island/Lido Shores
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/lemon_bay?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Lemon Bay
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/punta_gorda_charlotte_harbor?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Punta Gorda - Charlotte Harbor
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/boca_grande_gasparilla_island?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Boca Grande
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/fort_myers_beach?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Fort Myers Beach
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/naples?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Naples Pier
+            </option>
+            <option value="https://www.windfinder.com/widget/forecast/northwest_florida_bay?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+              Northwest Florida Bay
+            </option>
+            <option title="Windy Euro Area Wind Forecast" value="https://embed.windy.com/embed2.html?lat=23.201&lon=-82.046&zoom=5&level=surface&overlay=wind&menu=&message=&marker=true&calendar=&pressure=&type=map&location=coordinates&detail=true&detailLat=26.785&detailLon=-82.046&metricWind=kt&metricTemp=%C2%B0F">
+              **Windy**
+            </option>
+          </select>
+        </form>
+      </div>
+      <div class='item4'>
+ <!--        <iframe sandbox="allow-scripts" height="320" id="Frame2" name="Frame2" src="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=187112&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 4&activity=Sail&app=sailflow" title="Click below to show conditions" width="200" style="border:none;overflow:hidden;"></iframe> -->
+        <iframe sandbox="allow-scripts" height="320" id="Frame2" name="Frame2" src="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=20123&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CHYC&activity=Sail&app=sailflow" title="Click below to show conditions" width="200" style="border:none;overflow:hidden;"></iframe>
+        <form id="change3" name="change3">
+          <select class="soflow" name="options" onchange="document.getElementById('Frame2').src = this.options[this.selectedIndex].value" title="Click dropdown menu for new location">
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=20123&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Charlotte Hrbr&activity=Sail&app=sailflow">
+              Select A Location...
+            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=1744&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Clearwater Beach&activity=Sail&app=sailflow">
+              Clearwater Beach
+            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=153571&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Clam Bayou (Gulf Port)&activity=Sail&app=sailflow">
+              Clam Bayou (Gulf Port)
+            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=120587&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Middle Tampa Bay&activity=Sail&app=sailflow">
+              Middle Tampa Bay
+            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=158270&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Anna Maria&activity=Sail&app=sailflow">
+              Anna Maria
+            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=500&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Venice Beach&activity=Sail&app=sailflow">
+              Venice Beach
+            </option>
+<!--             <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=572317&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 2&activity=Sail&app=sailflow">
+              Marker 2            </option>
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=187112&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 4&activity=Sail&app=sailflow">
+              Marker 4
+            </option>--> 
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=20123&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Charlotte Hrbr CHYC&activity=Sail&app=sailflow">
+              Charlotte Hrbr
+            </option>
+<!--             <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=158288&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Pine Island&activity=Sail&app=sailflow">
+              Pine Island
+            </option> -->
+<!--             <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=168703&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Useppa Island&activity=Sail&app=sailflow">
+              Useppa Island
+            </option> -->
+            <option title="Detailed Forecast" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=181949&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=North Captiva&activity=Sail&app=sailflow">
+              North Captiva
+            </option>
+            <option title="Detailed Forecast" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=20124&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Tarpon Pt&activity=Sail&app=sailflow">
+              Tarpon Pt
+            </option>
+            <option title="Detailed Forecast" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=100874&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Gulf of Mexico SCCF&activity=Sail&app=sailflow">
+              Gulf of Mexico SCCF
+            </option>
+            <option title="Detailed Forecast" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=52960&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Naples Bay&activity=Sail&app=sailflow">
+              Naples Bay
+            </option>
+            <option title="Detailed Forecast" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=51891&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=West Fl South Buoy&activity=Sail&app=sailflow">
+              West Fl South Buoy
+            </option>
+          </select>
+        </form>
+      </div>
+      <div class='item5'>
+        <div title="Drag Circle for time at spot, use + or - to change days Thank you Tidegraph for the widget">
+          <iframe sandbox="allow-scripts  allow-same-origin " allowfullscreen height="450" id="youriframe" name="youriframe" src="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=.9&lat=26.9333&lng=-82.0667" title="Drag Circle for time at spot, use + or - to change days" width="300" style="border:none;"></iframe>
+          <form id="change1" name="change1">
+            <select class="soflow" name="options" onchange="document.getElementById('youriframe').src = this.options[this.selectedIndex].value" title="Click dropdown menu for new location">
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&lat=26.9333&lng=-82.0667">
+                Select A Location. . .
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Dunedin, St. Joseph Sound, Florida">
+                Dunedin, St. Joseph Sound
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Clearwater, Florida">
+                Clearwater
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=St. Petersburg, Tampa Bay">
+                St. Petersburg
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Sarasota, Sarasota Bay, Florida">
+                Sarasota Bay
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Venice Inlet (inside), Florida">
+                Venice Inlet (inside)
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Englewood, Lemon Bay, Florida">
+                Lemon Bay
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Placida, Gasparilla Sound, Florida">
+                Placida
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Matlacha%20Pass%20%28bascule%20bridge%29,%20fl">
+                Matlacha
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&lat=26.9333&lng=-82.0667">
+                Punta Gorda
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Port Boca Grande, Charlotte Harbor, Florida">
+                Boca Grande
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Matanzas Pass (fixed bridge) Estero Island, Florida">
+                Matanzas Pass
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Iona Shores, Caloosahatchee River, Florida">
+                Iona Shores
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Naples, Naples Bay, north end, Florida">
+                Naples Bay, north end
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Marco, Big Marco River, Florida">
+                Big Marco River
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Shark River entrance, Florida">
+                Shark River entrance
+              </option>
+              <option value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Boot Key Harbor bridge, Boot Key, Florida">
+                Boot Key Harbor bridge
+              </option>
+            </select>
+          </form>
+        </div>
+      </div>
+      <div class='item6'>
+          <img style="max-height:375px;min-width:98%;" alt="Image not available" id="change-image" src="https://s.w-x.co/staticmaps/wu/wxtype/county_loc/pie/animate.png">
+        <div id="div2" style="display: block;">
+        <div class="button-container">
+        <button class="button" onclick="swapImage('https://cdn.star.nesdis.noaa.gov/GOES16/ABI/GIFS/GOES16-CONUS-GEOCOLOR-625x375.gif')" title="Realtime imagery from the latest Satellite">GOES16</button>
+        <button class="button" onclick="swapImage('https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/10/625x375.jpg')" title="GOES Water vapor Band 10">GOESB10</button>
+		<button class="button" onclick="swapImage('https://s.w-x.co/staticmaps/wu/wxtype/county_loc/pie/animate.png')" title="Rain Radar">Radar</button>
+        <button class="button" onclick="swapImage('https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/dynamic/wbbh/nbc2_watervapor_web.jpg?crop=1xw:1xh;center,top&resize=900:*')" title="Water Vapor">Vapor</button>
+<!-- 	    <button class="button" onclick="swapImage('https://s.w-x.co/staticmaps/DCT_SPECIAL17_1280x720.jpg')" title="Saharan Dust">Dust</button> -->        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/noaa/noaad1.gif?1576417172')" title="Forecast Prediction 24hrs">Prediction</button>
+		<button class="button" onclick="swapImage('https://www.weather.gov/images/tbw/graphicast/Today.png')" title="Rain Forecast">Today</button>
+        <button class="button" onclick="swapImage('https://www.weather.gov/images/tbw/graphicast/Tonight.png')" title="Tonight Rain Forecast">Night</button>
+        <button class="button" onclick="swapImage('https://www.weather.gov/images/tbw/graphicast/Tomorrow.png')" title="Tomorrow Rain Forecast">TMRW</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/qpf/p120i.gif')" title="5 day Rain Forecast totals">Rain</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/allfcsts_loop_ndfd.gif')" title="Upcoming Fronts">Fronts</button>       
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/91fndfd.gif')" title="Upcoming Fronts">+0hr</button> 
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/92fndfd.gif')" title="Upcoming Fronts">+6hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/93fndfd.gif')" title="Upcoming Fronts">+12hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/94fndfd.gif')" title="Upcoming Fronts">+18hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/95fndfd.gif')" title="Upcoming Fronts">+24hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/96fndfd.gif')" title="Upcoming Fronts">+30hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/98fndfd.gif')" title="Upcoming Fronts">+42hr</button>
+        <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/basicwx/99fndfd.gif')" title="Upcoming Fronts">+54hr</button>
+		</div>    
+        </div>
+      </div>
+    </div>
+<!-- Place JS at end of body for best performance -->
+<script src="js/weather.js"></script>
+</body>
+</html>
