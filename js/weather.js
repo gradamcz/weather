@@ -53,47 +53,6 @@ function showDateDivsByMonth() {
 }
 document.addEventListener("DOMContentLoaded", showDateDivsByMonth);
 
-// Modal notice logic
-function setCookie(cname, cvalue, exdays) {
-    var expires = "";
-    var date = new Date();
-    date.setDate(date.getDate() + 7);
-    var midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
-    expires = "; expires=" + midnight.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-function myFunction2() {
-    var x = document.getElementById("ModalNotice");
-    var user = getCookie("Modalshown");
-    if (user == "") {
-        x.className = "show";
-    }
-    setTimeout(function() {
-        x.className = x.className.replace("show", "");
-    }, 19500);
-}
-window.onload = myFunction2;
-function myFunction1() {
-    var x = document.getElementById("ModalNotice");
-    x.className = x.className.replace("show", "");
-    setCookie("Modalshown", "yes", 1);
-}
-
 // PWA installation logic
 let deferredPrompt;
 const installButton = document.getElementById('install-button-main');
