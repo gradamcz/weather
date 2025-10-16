@@ -3,7 +3,7 @@
     "theme_color": "#e4e1de",
     "background_color": "#000000",
     "display": "standalone",
-    "start_url": "Weather.htm",
+    "start_url": "index.htm",
     "name": "Boating Weather Courtesy of Gratech...", 
     "short_name": "Weather",
     "description": "Weather App Courtesy of George Adamczyk...Enjoy!",
