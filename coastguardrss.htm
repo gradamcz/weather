@@ -2,115 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>US Coast Guard News</title>
+
+  <!-- Preconnect for faster font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" crossorigin="anonymous">
 
-  <title>US Coast Guard News</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 5vw; background: #f4f4f4; }
-:root {
-    --text-color: #000000;
-    --text-color-inv: #FFFFFF;
-    --text-container-bkgrd: rgba(255, 255, 255, 0.9);
-    --butn-bkgrd: #e4e4e4;
-    --menu-ftr-bkgrd-colr: 9, 6, 37;
-    --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-}
+    :root {
+      --text-color: #000000;
+      --text-color-inv: #FFFFFF;
+      --text-container-bkgrd: rgba(255, 255, 255, 0.9);
+      --butn-bkgrd: #e4e4e4;
+      --menu-ftr-bkgrd-colr: 9, 6, 37;
+      --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--main-font);
+      padding: 5vw;
+      background: #f4f4f4;
+    }
+
     h1 {
-    font-family: 'Bebas Neue';
-    font-size: clamp(1.5rem, 4vw, 2.0rem);
-        line-height: 1.5rem;
-        text-transform: uppercase;
-        font-weight: 500;
-    	}
-    .article { margin-bottom: 20px; padding: 10px; background: #fff; border-radius: 5px; }
-	.article a {
-    color: #000000;
-	font-family: 'Bebas Neue';
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    line-height: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 500;
-	}
-   .article h2 { 
-	font-family: 'Bebas Neue';
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    line-height: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 500; 
-	}
+      font-family: 'Bebas Neue';
+      font-size: clamp(1.5rem, 4vw, 2.0rem);
+      line-height: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .article {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 5px;
+    }
+
+    .article a, .article h2 {
+      font-family: 'Bebas Neue';
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      line-height: 1.25rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
     .article p {
-	display: block;
-	font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-    margin-bottom: 2rem;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0; 
-	}
-	.date { font-size: 0.85em; color: #666; margin-top: 8px; }
-	.footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: #000000;
-    text-align: center;
-    font-size: .8rem;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
+      display: block;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      margin: 0 0 2rem 0;
+    }
+
+    .date {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .footer {
+      width: 100%;
+      color: var(--text-color);
+      text-align: center;
+      font-size: .8rem;
+      padding: 10px 0;
+    }
   </style>
 </head>
 <body>
   <h1>Latest LOCAL US Coast Guard ALERTS</h1>
   <div id="feed">Loading articles...</div>
-    <div class="footer">
-      <div id="copyright"></div>
-      <script>
-        const paragraph = `
-    		<p>
-    		Copyright &copy; ${new Date().getFullYear()} - Gratech Co<br>
-     		</p>`;
-        document.getElementById('copyright').innerHTML = paragraph;
-      </script>
-    </div>
 
-  <script>
-async function loadRSS() {
-  const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss';
-  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+  <div class="footer">
+    <div id="copyright"></div>
+  </div>
 
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    const feedDiv = document.getElementById('feed');
-    feedDiv.innerHTML = '';
-
-    data.items.slice(0, 8).forEach(item => {
-      let pubDate = 'Date not available';
-      if (item.pubDate) {
-        const parsedDate = new Date(item.pubDate);
-        if (!isNaN(parsedDate)) {
-          pubDate = parsedDate.toLocaleDateString('en-US', {
-            year: 'numeric', month: 'long', day: 'numeric'
-          });
-        }
-      }
-
-      const article = document.createElement('div');
-      article.className = 'article';
-      article.innerHTML = `
-        <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
-        <p>${item.description}</p>
-        <div class="date">${pubDate}</div>
-      `;
-      feedDiv.appendChild(article);
+  <!-- Defer scripts to avoid render blocking -->
+  <script defer>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('copyright').innerHTML = `
+        <p>Copyright &copy; ${new Date().getFullYear()} - Gratech Co</p>`;
     });
-  } catch (error) {
-    document.getElementById('feed').innerHTML = 'Failed to load articles.';
-    console.error('RSS load error:', error);
-  }
-}
+
+    async function loadRSS() {
+      const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss';
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const feedDiv = document.getElementById('feed');
+        feedDiv.innerHTML = '';
+
+        const fragment = document.createDocumentFragment();
+
+        data.items.slice(0, 8).forEach(item => {
+          const pubDate = item.pubDate
+            ? new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            : 'Date not available';
+
+          const article = document.createElement('div');
+          article.className = 'article';
+          article.innerHTML = `
+            <h2><a href="${item.link}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">${item.title}</a></h2>
+            <p>${item.description}</p>
+            <div class="date">${pubDate}</div>
+          `;
+          fragment.appendChild(article);
+        });
+
+        feedDiv.appendChild(fragment);
+      } catch (error) {
+        document.getElementById('feed').innerHTML = 'Failed to load articles.';
+        console.error('RSS load error:', error);
+      }
+    }
+
     loadRSS();
   </script>
 </body>
