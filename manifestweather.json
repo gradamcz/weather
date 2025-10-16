@@ -4,9 +4,9 @@
     "background_color": "#000000",
     "display": "standalone",
     "start_url": "Weather.htm",
-    "name": "PGSC Boating Weather Courtesy of George Adamczyk...", 
+    "name": "Boating Weather Courtesy of Gratech...", 
     "short_name": "Weather",
-    "description": "PGSC Weather App Courtesy of George Adamczyk...Enjoy!",
+    "description": "Weather App Courtesy of George Adamczyk...Enjoy!",
     "icons": [
         {
             "src": "Weather-Main-192x192.png",
