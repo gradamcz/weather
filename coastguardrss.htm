@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     :root {
@@ -26,14 +27,18 @@
       background: #f4f4f4;
     }
 
-    h1 {
-      font-family: 'Bebas Neue';
-      font-size: clamp(1.5rem, 4vw, 2.0rem);
-      line-height: 1.5rem;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
+/* Coast Guard Alert Header */
+h1, .header {
+  font-size: 2.5rem;           /* Large and readable on desktop */
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+  color: #003366;              /* Coast Guard blue */
+  font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
+  background-color: #f0f8ff;   /* Optional: light blue highlight */
+  padding: 0.5rem;
+  border-radius: 8px;
+}
     .article {
       margin-bottom: 20px;
       padding: 10px;
