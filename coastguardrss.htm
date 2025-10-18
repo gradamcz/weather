@@ -2,130 +2,398 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>US Coast Guard News</title>
-
-  <!-- Preconnect for faster font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <title>PGSC US Coast Guard News</title>
   <style>
+    body { font-family: Arial, sans-serif; padding: 1vw; background: #f4f4f4; }
     :root {
-      --text-color: #000000;
-      --text-color-inv: #FFFFFF;
-      --text-container-bkgrd: rgba(255, 255, 255, 0.9);
-      --butn-bkgrd: #e4e4e4;
-      --menu-ftr-bkgrd-colr: 9, 6, 37;
-      --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 16px;
+        --text-color: #000000;
+        --text-color-inv: #FFFFFF;
+        --text-container-bkgrd: rgba(255, 255, 255, 0.9);
+        --butn-bkgrd: #e4e4e4;
+        --menu-ftr-bkgrd-colr: 9, 6, 37;
+        --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
     }
+    h1 {
+        font-family: 'Bebas Neue', Arial;
+        font-size: clamp(1.5rem, 4vw, 2.0rem);
+        line-height: 1;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+		margin-block-start: 0.2em;
+		margin-block-end: 0.2em;
+  
+  font-size: clamp(1.5rem, 4vw, 2.0rem); /* Your original sizing */
+  transform: scaleY(1.15); /* Boost vertical scale to match Arial */
+  display: inline-block; /* Required for transform to apply properly */
+  transform-origin: bottom; /* Keeps baseline aligned */
 
-    body {
-      font-family: var(--main-font);
-      padding: 5vw;
-      background: #f4f4f4;
+
+
     }
-
-/* Coast Guard Alert Header */
-h1, .header {
-  font-size: clamp(1.8rem, 3vw, 2.5rem); /* min, preferred, max */
-  font-weight: bold;
-  text-align: center;
-  margin: 1rem 0;
-  color: #003366;              /* Coast Guard blue */
-  font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
-  background-color: #f0f8ff;   /* Optional: light blue highlight */
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-    .article {
-      margin-bottom: 20px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 5px;
+    .article { margin-bottom: 20px; padding: 10px; background: #fff; border-radius: 5px; }
+    .article a {
+        color: #000000;
+        font-family: Arial;
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        line-height: 1;
+        text-transform: uppercase;
+        font-weight: 700;
     }
-
-    .article a, .article h2 {
-      font-family: 'Bebas Neue';
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      line-height: 1.0rem;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--text-color);
+    .article h2 { 
+        font-family: 'Bebas Neue';
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        line-height: 1;
+        text-transform: uppercase;
+        font-weight: 700; 
+        margin-top: 0;
     }
-
     .article p {
-      display: block;
-      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-      margin: 0 0 2rem 0;
+        display: block;
+		font-family: Arial;
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+		font-weight: 400; 
+		line-height: 1;
+        margin-bottom: 2rem;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0; 
     }
-
-    .date {
-      font-size: 0.65em;
-      color: #666;
-      margin-top: 8px;
-    }
-
+    .date { font-size: 0.85em; color: #666; margin-top: 8px; }
     .footer {
-      width: 100%;
-      color: var(--text-color);
-      text-align: center;
-      font-size: .8rem;
-      padding: 10px 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: #000000;
+        text-align: center;
+        font-size: .8rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-top: 2rem;
+    }
+    .loading {
+        text-align: center;
+        padding: 2rem;
+        font-style: italic;
+        color: #666;
+    }
+    .last-updated {
+        text-align: center;
+        font-size: 0.8em;
+        color: #666;
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+.refresh-container {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+    .refresh-btn {
+        background: #2c3e50;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
+    }
+    .refresh-btn:hover {
+        background: #34495e;
+    }
+    .refresh-btn:disabled {
+        background: #95a5a6;
+        cursor: not-allowed;
+    }
+    .refresh-btn.loading {
+        background: #7f8c8d;
+        position: relative;
+        color: transparent;
+    }
+    .refresh-btn.loading::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
+        margin: -8px 0 0 -8px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .update-notice {
+        background: #e8f5e8;
+        border: 1px solid #4caf50;
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        text-align: center;
+        font-size: 0.9em;
+        color: #2e7d32;
+        animation: fadeOut 3s forwards;
+        animation-delay: 2s;
+    }
+    @keyframes fadeOut {
+        to {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
     }
   </style>
 </head>
 <body>
-  <h1>Latest LOCAL US Coast Guard ALERTS</h1>
+  <h1>
+<!--     <img src="https://www.pgscweb.com/images/PGSC%20Logos/PGSC%20Logo%20V3.png" alt="PGSC" style="height: clamp(100px, 15vw, 250px); vertical-align:middle; margin-right:1px;"> -->
+Latest LOCAL US Coast Guard ALERTS
+  </h1>
+  
+  <div class="refresh-container">
+    <button id="refreshBtn" class="refresh-btn" title="Get latest alerts">
+      Refresh Alerts
+    </button>
+  </div>
+  
+  <div id="lastUpdated" class="last-updated"></div>
+  <div id="updateNotice"></div>
   <div id="feed">Loading articles...</div>
-
+  
   <div class="footer">
     <div id="copyright"></div>
+    <script>
+      const paragraph = `
+        <p>
+        Copyright &copy; ${new Date().getFullYear()} - Gratech Co<br>
+        </p>`;
+      document.getElementById('copyright').innerHTML = paragraph;
+    </script>
   </div>
 
-  <!-- Defer scripts to avoid render blocking -->
-  <script defer>
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('copyright').innerHTML = `
-        <p>Copyright &copy; ${new Date().getFullYear()} - Gratech Co</p>`;
-    });
+  <script>
+    // Simple cache implementation
+    const RSS_CACHE_KEY = 'uscg_rss_cache';
+    const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
-    async function loadRSS() {
-      const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss';
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+    // DOM elements
+    let refreshBtn, lastUpdatedEl, updateNoticeEl, feedEl;
 
+    async function loadRSS(showCachedFirst = true) {
+      initializeDOMElements();
+      
+      // Show loading state only on initial load
+      if (showCachedFirst) {
+        feedEl.innerHTML = '<div class="loading">Loading latest alerts...</div>';
+      }
+      
+      // Check cache first and display immediately (progressive loading)
+      const cached = getCachedRSS();
+      if (cached && showCachedFirst) {
+        displayArticles(cached.articles);
+        updateLastUpdatedDisplay(cached.timestamp);
+      }
+      
+      // Always try to fetch fresh data in background
       try {
+        const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+
         const response = await fetch(apiUrl);
         const data = await response.json();
-        const feedDiv = document.getElementById('feed');
-        feedDiv.innerHTML = '';
-
-        const fragment = document.createDocumentFragment();
-
+        const articles = [];
+        
         data.items.slice(0, 8).forEach(item => {
-          const pubDate = item.pubDate
-            ? new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-            : 'Date not available';
-
-          const article = document.createElement('div');
-          article.className = 'article';
-          article.innerHTML = `
-            <h2><a href="${item.link}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">${item.title}</a></h2>
-            <p>${item.description}</p>
-            <div class="date">${pubDate}</div>
-          `;
-          fragment.appendChild(article);
+          let pubDate = 'Date not available';
+          if (item.pubDate) {
+            const parsedDate = new Date(item.pubDate);
+            if (!isNaN(parsedDate)) {
+              pubDate = parsedDate.toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric'
+              });
+            }
+          }
+          
+          articles.push({
+            title: item.title,
+            link: item.link,
+            description: item.description,
+            formattedDate: pubDate
+          });
         });
-
-        feedDiv.appendChild(fragment);
+        
+        // Cache the results with current timestamp
+        const cacheData = {
+          articles: articles,
+          timestamp: Date.now()
+        };
+        cacheRSS(cacheData);
+        
+        // Update display with fresh data
+        displayArticles(articles);
+        updateLastUpdatedDisplay(cacheData.timestamp);
+        
+        // Show update notice if this was a manual refresh
+        if (!showCachedFirst) {
+          showUpdateNotice('Alerts updated successfully!');
+        }
+        
       } catch (error) {
-        document.getElementById('feed').innerHTML = 'Failed to load articles.';
         console.error('RSS load error:', error);
+        
+        // If fetch fails and we have no cached data, show error
+        if (!cached && showCachedFirst) {
+          feedEl.innerHTML = 'Failed to load articles. Please try again later.';
+        }
+        // If we have cached data but background refresh failed, keep showing cached data silently
+        else if (cached && showCachedFirst) {
+          // Don't show error - just keep cached content visible
+          console.log('Background refresh failed, using cached data');
+        }
+        // If manual refresh fails, show error notice
+        else if (!showCachedFirst) {
+          showUpdateNotice('Failed to update alerts. Using cached data.', true);
+          // Make sure we still show the cached data after failed refresh
+          const currentCached = getCachedRSS();
+          if (currentCached) {
+            displayArticles(currentCached.articles);
+            updateLastUpdatedDisplay(currentCached.timestamp);
+          }
+        }
+      } finally {
+        // Re-enable refresh button if it was disabled
+        if (refreshBtn) {
+          refreshBtn.disabled = false;
+          refreshBtn.classList.remove('loading');
+          refreshBtn.textContent = 'Refresh Alerts';
+        }
       }
     }
 
-    loadRSS();
+    function initializeDOMElements() {
+      if (!refreshBtn) refreshBtn = document.getElementById('refreshBtn');
+      if (!lastUpdatedEl) lastUpdatedEl = document.getElementById('lastUpdated');
+      if (!updateNoticeEl) updateNoticeEl = document.getElementById('updateNotice');
+      if (!feedEl) feedEl = document.getElementById('feed');
+    }
+
+    function displayArticles(articles) {
+      if (!feedEl) feedEl = document.getElementById('feed');
+      feedEl.innerHTML = '';
+      
+      if (!articles || articles.length === 0) {
+        feedEl.innerHTML = '<div class="loading">No articles available.</div>';
+        return;
+      }
+      
+      articles.forEach(item => {
+        const article = document.createElement('div');
+        article.className = 'article';
+        article.innerHTML = `
+          <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
+          <p>${item.description}</p>
+          <div class="date">${item.formattedDate}</div>
+        `;
+        feedEl.appendChild(article);
+      });
+    }
+
+    function updateLastUpdatedDisplay(timestamp) {
+      if (!lastUpdatedEl) return;
+      
+      if (timestamp) {
+        const date = new Date(timestamp);
+        const timeString = date.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const dateString = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        lastUpdatedEl.innerHTML = `Last updated: ${dateString} at ${timeString}`;
+      } else {
+        lastUpdatedEl.innerHTML = 'Last updated: Unknown';
+      }
+    }
+
+    function showUpdateNotice(message, isError = false) {
+      if (!updateNoticeEl) return;
+      
+      updateNoticeEl.innerHTML = `
+        <div class="update-notice" style="${isError ? 'background: #ffebee; border-color: #f44336; color: #c62828;' : ''}">
+          ${message}
+        </div>
+      `;
+      
+      // Clear any existing notices after animation
+      setTimeout(() => {
+        if (updateNoticeEl) {
+          updateNoticeEl.innerHTML = '';
+        }
+      }, 5000);
+    }
+
+    function getCachedRSS() {
+      try {
+        const cached = localStorage.getItem(RSS_CACHE_KEY);
+        if (!cached) return null;
+        
+        const cacheData = JSON.parse(cached);
+        // Return cached data even if expired, as fallback
+        return cacheData;
+      } catch (e) {
+        // If cache is corrupted, ignore it
+        console.error('Cache error:', e);
+        return null;
+      }
+    }
+
+    function cacheRSS(cacheData) {
+      try {
+        localStorage.setItem(RSS_CACHE_KEY, JSON.stringify(cacheData));
+      } catch (e) {
+        // Ignore cache errors
+        console.error('Cache save error:', e);
+      }
+    }
+
+    function setupRefreshButton() {
+      refreshBtn = document.getElementById('refreshBtn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+          // Disable button and show loading state
+          refreshBtn.disabled = true;
+          refreshBtn.classList.add('loading');
+          refreshBtn.textContent = 'Refreshing...';
+          
+          // Load fresh data without showing cached first
+          loadRSS(false);
+        });
+      }
+    }
+
+    // Load RSS after page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeDOMElements();
+      setupRefreshButton();
+      setTimeout(() => loadRSS(true), 100);
+    });
   </script>
 </body>
 </html>
