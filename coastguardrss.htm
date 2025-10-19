@@ -2,187 +2,395 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <title>PGSC US Coast Guard News</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 1vw; background: #f4f4f4; }
     :root {
-        --text-color: #000000;
-        --text-color-inv: #FFFFFF;
-        --text-container-bkgrd: rgba(255, 255, 255, 0.9);
-        --butn-bkgrd: #e4e4e4;
-        --menu-ftr-bkgrd-colr: 9, 6, 37;
-        --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        font-size: 16px;
+      --primary-color: #1a365d;
+      --secondary-color: #2d3748;
+      --accent-color: #2b6cb0;
+      --text-color: #2d3748;
+      --text-light: #718096;
+      --text-inverse: #ffffff;
+      --background: black;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --success-color: #38a169;
+      --error-color: #e53e3e;
+      --warning-color: #dd6b20;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s ease;
+	  --card-bg: #f8f9fa; /* Very light gray */
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    header {
+      background: var(--secondary-color);
+      color: var(--text-inverse);
+      padding: 1.2rem 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      height: 60px;
+      filter: brightness(0) invert(1);
+    }
+
     h1 {
-        font-family: 'Bebas Neue', Arial;
-        font-size: clamp(1.5rem, 4vw, 2.0rem);
-        line-height: 1;
-        text-transform: uppercase;
-        font-weight: 500;
-        margin-bottom: 0.2rem;
-		margin-block-start: 0.2em;
-		margin-block-end: 0.2em;
-  
-  font-size: clamp(1.5rem, 4vw, 2.0rem); /* Your original sizing */
-  transform: scaleY(1.15); /* Boost vertical scale to match Arial */
-  display: inline-block; /* Required for transform to apply properly */
-  transform-origin: bottom; /* Keeps baseline aligned */
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-align: center;
+      margin: 0;
+      line-height: 1.1;
+    }
 
+    .subtitle {
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
 
+    .controls {
+      background: var(--card-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
 
+    .controls-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-    .article { margin-bottom: 20px; padding: 10px; background: #fff; border-radius: 5px; }
-    .article a {
-        color: #000000;
-        font-family: Arial;
-        font-size: clamp(1.1rem, 3vw, 1.5rem);
-        line-height: 1;
-        text-transform: uppercase;
-        font-weight: 700;
-    }
-    .article h2 { 
-        font-family: 'Bebas Neue';
-        font-size: clamp(1.1rem, 3vw, 1.5rem);
-        line-height: 1;
-        text-transform: uppercase;
-        font-weight: 700; 
-        margin-top: 0;
-    }
-    .article p {
-        display: block;
-		font-family: Arial;
-        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-		font-weight: 400; 
-		line-height: 1;
-        margin-bottom: 2rem;
-        margin-block-start: 0;
-        margin-block-end: 0;
-        margin-inline-start: 0;
-        margin-inline-end: 0; 
-    }
-    .date { font-size: 0.85em; color: #666; margin-top: 8px; }
-    .footer {
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        color: #000000;
-        text-align: center;
-        font-size: .8rem;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin-top: 2rem;
-    }
-    .loading {
-        text-align: center;
-        padding: 2rem;
-        font-style: italic;
-        color: #666;
-    }
+
     .last-updated {
-        text-align: center;
-        font-size: 0.8em;
-        color: #666;
-        margin-bottom: 1rem;
-        font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text-light);
     }
-.refresh-container {
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+
     .refresh-btn {
-        background: #2c3e50;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: Arial, sans-serif;
-        font-size: 0.9rem;
-        transition: background-color 0.3s;
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(43, 108, 176, 0.3);
     }
+
     .refresh-btn:hover {
-        background: #34495e;
+      background: gray;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(43, 108, 176, 0.4);
     }
+
+    .refresh-btn:active {
+      transform: translateY(0);
+    }
+
     .refresh-btn:disabled {
-        background: #95a5a6;
-        cursor: not-allowed;
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
+
     .refresh-btn.loading {
-        background: #7f8c8d;
-        position: relative;
-        color: transparent;
+      position: relative;
+      color: transparent;
     }
+
     .refresh-btn.loading::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: 50%;
-        left: 50%;
-        margin: -8px 0 0 -8px;
-        border: 2px solid transparent;
-        border-top: 2px solid white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      left: 50%;
+      margin: -9px 0 0 -9px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
+
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
+
     .update-notice {
-        background: #e8f5e8;
-        border: 1px solid #4caf50;
-        border-radius: 4px;
-        padding: 0.5rem;
-        margin: 0.5rem 0;
-        text-align: center;
-        font-size: 0.9em;
-        color: #2e7d32;
-        animation: fadeOut 3s forwards;
-        animation-delay: 2s;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      text-align: center;
+      font-weight: 500;
+      animation: slideIn 0.3s ease;
     }
-    @keyframes fadeOut {
-        to {
-            opacity: 0;
-            height: 0;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-        }
+
+    .update-notice.success {
+      background: rgba(56, 161, 105, 0.1);
+      border: 1px solid var(--success-color);
+      color: var(--success-color);
+    }
+
+    .update-notice.error {
+      background: rgba(229, 62, 62, 0.1);
+      border: 1px solid var(--error-color);
+      color: var(--error-color);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feed {
+      padding: 2rem 0;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .article-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+    }
+
+    .article-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .article-title a:hover {
+      color: var(--accent-color);
+    }
+
+    .article-description {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;  /* CHANGED: Show 6 lines instead of 3 */
+      -webkit-box-orient: vertical;
+      line-height: 1.4;       /* ADDED: Better readability for more lines */
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .article-date {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .read-more {
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+    }
+
+    .read-more:hover {
+      gap: 0.5rem;
+    }
+
+    .loading-state, .empty-state, .error-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      grid-column: 1 / -1;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(43, 108, 176, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--accent-color);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+
+    .empty-icon, .error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: var(--text-inverse);
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-content p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .controls-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .last-updated {
+        text-align: center;
+      }
+      
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>
-<!--     <img src="https://www.pgscweb.com/images/PGSC%20Logos/PGSC%20Logo%20V3.png" alt="PGSC" style="height: clamp(100px, 15vw, 250px); vertical-align:middle; margin-right:1px;"> -->
-Latest LOCAL US Coast Guard ALERTS
-  </h1>
-  
-  <div class="refresh-container">
-    <button id="refreshBtn" class="refresh-btn" title="Get latest alerts">
-      Refresh Alerts
-    </button>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <!-- Optional: Add logo here -->
+        <div>
+          <h1>Local US Coast Guard Alerts</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="container">
+      <div class="controls-content">
+        <div class="last-updated" id="lastUpdated">Last updated: Loading...</div>
+        <button id="refreshBtn" class="refresh-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.5 8C13.5 9.15761 13.0589 10.2723 12.2588 11.1173C11.4587 11.9623 10.3546 12.4777 9.175 12.5629C7.99545 12.6481 6.82293 12.2965 5.88873 11.5751C4.95454 10.8538 4.325 9.8125 4.125 8.66667M4.125 8.66667L5.5 10M4.125 8.66667L2.75 7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2.5 8C2.5 6.84239 2.94107 5.7277 3.74118 4.88269C4.54129 4.03768 5.64536 3.52233 6.82491 3.43712C8.00445 3.35191 9.17697 3.70346 10.1112 4.42485C11.0454 5.14625 11.675 6.1875 11.875 7.33333M11.875 7.33333L10.5 6M11.875 7.33333L13.25 8.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Refresh Alerts
+        </button>
+      </div>
+    </div>
   </div>
-  
-  <div id="lastUpdated" class="last-updated"></div>
-  <div id="updateNotice"></div>
-  <div id="feed">Loading articles...</div>
-  
-  <div class="footer">
-    <div id="copyright"></div>
-    <script>
-      const paragraph = `
-        <p>
-        Copyright &copy; ${new Date().getFullYear()} - Gratech Co<br>
-        </p>`;
-      document.getElementById('copyright').innerHTML = paragraph;
-    </script>
+
+  <div class="container">
+    <div id="updateNotice"></div>
+
+    <main class="feed">
+      <div id="feed" class="articles-grid">
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading latest alerts...</p>
+        </div>
+      </div>
+    </main>
   </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>Copyright &copy; <span id="currentYear"></span> - Gratech Co</p>
+        <p>US Coast Guard alerts provided via public RSS feed</p>
+      </div>
+    </div>
+  </footer>
 
   <script>
     // Simple cache implementation
@@ -192,12 +400,15 @@ Latest LOCAL US Coast Guard ALERTS
     // DOM elements
     let refreshBtn, lastUpdatedEl, updateNoticeEl, feedEl;
 
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
     async function loadRSS(showCachedFirst = true) {
       initializeDOMElements();
       
       // Show loading state only on initial load
       if (showCachedFirst) {
-        feedEl.innerHTML = '<div class="loading">Loading latest alerts...</div>';
+        showLoadingState();
       }
       
       // Check cache first and display immediately (progressive loading)
@@ -213,7 +424,16 @@ Latest LOCAL US Coast Guard ALERTS
         const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
 
         const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        
+        if (!data.items || !Array.isArray(data.items)) {
+          throw new Error('Invalid RSS data format');
+        }
+        
         const articles = [];
         
         data.items.slice(0, 8).forEach(item => {
@@ -227,10 +447,17 @@ Latest LOCAL US Coast Guard ALERTS
             }
           }
           
+          // Clean up description - remove HTML tags and limit length
+          let description = item.description || '';
+          description = description.replace(/<[^>]*>/g, '');
+          if (description.length > 300) {  // CHANGED: Increased from 150 to 300 characters
+            description = description.substring(0, 300) + '...';
+          }
+          
           articles.push({
             title: item.title,
             link: item.link,
-            description: item.description,
+            description: description,
             formattedDate: pubDate
           });
         });
@@ -248,7 +475,7 @@ Latest LOCAL US Coast Guard ALERTS
         
         // Show update notice if this was a manual refresh
         if (!showCachedFirst) {
-          showUpdateNotice('Alerts updated successfully!');
+          showUpdateNotice('Alerts updated successfully!', 'success');
         }
         
       } catch (error) {
@@ -256,7 +483,7 @@ Latest LOCAL US Coast Guard ALERTS
         
         // If fetch fails and we have no cached data, show error
         if (!cached && showCachedFirst) {
-          feedEl.innerHTML = 'Failed to load articles. Please try again later.';
+          showErrorState('Failed to load articles. Please try again later.');
         }
         // If we have cached data but background refresh failed, keep showing cached data silently
         else if (cached && showCachedFirst) {
@@ -265,7 +492,7 @@ Latest LOCAL US Coast Guard ALERTS
         }
         // If manual refresh fails, show error notice
         else if (!showCachedFirst) {
-          showUpdateNotice('Failed to update alerts. Using cached data.', true);
+          showUpdateNotice('Failed to update alerts. Using cached data.', 'error');
           // Make sure we still show the cached data after failed refresh
           const currentCached = getCachedRSS();
           if (currentCached) {
@@ -278,7 +505,13 @@ Latest LOCAL US Coast Guard ALERTS
         if (refreshBtn) {
           refreshBtn.disabled = false;
           refreshBtn.classList.remove('loading');
-          refreshBtn.textContent = 'Refresh Alerts';
+          refreshBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.5 8C13.5 9.15761 13.0589 10.2723 12.2588 11.1173C11.4587 11.9623 10.3546 12.4777 9.175 12.5629C7.99545 12.6481 6.82293 12.2965 5.88873 11.5751C4.95454 10.8538 4.325 9.8125 4.125 8.66667M4.125 8.66667L5.5 10M4.125 8.66667L2.75 7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 8C2.5 6.84239 2.94107 5.7277 3.74118 4.88269C4.54129 4.03768 5.64536 3.52233 6.82491 3.43712C8.00445 3.35191 9.17697 3.70346 10.1112 4.42485C11.0454 5.14625 11.675 6.1875 11.875 7.33333M11.875 7.33333L10.5 6M11.875 7.33333L13.25 8.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Refresh Alerts
+          `;
         }
       }
     }
@@ -290,25 +523,71 @@ Latest LOCAL US Coast Guard ALERTS
       if (!feedEl) feedEl = document.getElementById('feed');
     }
 
+    function showLoadingState() {
+      if (!feedEl) return;
+      feedEl.innerHTML = `
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading latest alerts...</p>
+        </div>
+      `;
+    }
+
+    function showErrorState(message) {
+      if (!feedEl) return;
+      feedEl.innerHTML = `
+        <div class="error-state">
+          <div class="error-icon">??</div>
+          <p>${message}</p>
+          <button id="retryBtn" class="refresh-btn" style="margin-top: 1rem;">
+            Try Again
+          </button>
+        </div>
+      `;
+      
+      // Add event listener to retry button
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          loadRSS(false);
+        });
+      }
+    }
+
     function displayArticles(articles) {
-      if (!feedEl) feedEl = document.getElementById('feed');
-      feedEl.innerHTML = '';
+      if (!feedEl) return;
       
       if (!articles || articles.length === 0) {
-        feedEl.innerHTML = '<div class="loading">No articles available.</div>';
+        feedEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">??</div>
+            <p>No alerts available at this time.</p>
+          </div>
+        `;
         return;
       }
       
-      articles.forEach(item => {
-        const article = document.createElement('div');
-        article.className = 'article';
-        article.innerHTML = `
-          <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
-          <p>${item.description}</p>
-          <div class="date">${item.formattedDate}</div>
-        `;
-        feedEl.appendChild(article);
-      });
+      const articlesHTML = articles.map(item => `
+        <div class="article-card">
+          <div class="article-content">
+            <h2 class="article-title">
+              <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+            </h2>
+            <p class="article-description">${item.description}</p>
+            <div class="article-meta">
+              <div class="article-date">${item.formattedDate}</div>
+              <a href="${item.link}" class="read-more" target="_blank" rel="noopener">
+                Read more
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      feedEl.innerHTML = articlesHTML;
     }
 
     function updateLastUpdatedDisplay(timestamp) {
@@ -332,16 +611,16 @@ Latest LOCAL US Coast Guard ALERTS
       }
     }
 
-    function showUpdateNotice(message, isError = false) {
+    function showUpdateNotice(message, type = 'success') {
       if (!updateNoticeEl) return;
       
       updateNoticeEl.innerHTML = `
-        <div class="update-notice" style="${isError ? 'background: #ffebee; border-color: #f44336; color: #c62828;' : ''}">
+        <div class="update-notice ${type}">
           ${message}
         </div>
       `;
       
-      // Clear any existing notices after animation
+      // Clear notice after 5 seconds
       setTimeout(() => {
         if (updateNoticeEl) {
           updateNoticeEl.innerHTML = '';
@@ -355,7 +634,13 @@ Latest LOCAL US Coast Guard ALERTS
         if (!cached) return null;
         
         const cacheData = JSON.parse(cached);
-        // Return cached data even if expired, as fallback
+        
+        // Check if cache is still valid
+        if (Date.now() - cacheData.timestamp > CACHE_DURATION) {
+          console.log('Cache expired');
+          return null;
+        }
+        
         return cacheData;
       } catch (e) {
         // If cache is corrupted, ignore it
