@@ -343,6 +343,354 @@
     }
   </style>
 </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Preconnect to critical domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.rss2json.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>PGSC US Coast Guard News</title>
+  <style>
+    :root {
+      --primary-color: #1a365d;
+      --secondary-color: #2d3748;
+      --accent-color: #2b6cb0;
+      --text-color: #2d3748;
+      --text-light: #718096;
+      --text-inverse: #ffffff;
+      --background: black;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --success-color: #38a169;
+      --error-color: #e53e3e;
+      --warning-color: #dd6b20;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s ease;
+	  --card-bg: #f8f9fa; /* Very light gray */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    header {
+      background: var(--secondary-color);
+      color: var(--text-inverse);
+      padding: 1.2rem 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      height: 60px;
+      filter: brightness(0) invert(1);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-align: center;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .controls {
+      background: var(--card-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .controls-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .last-updated {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .refresh-btn {
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(43, 108, 176, 0.3);
+    }
+
+    .refresh-btn:hover {
+      background: gray;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(43, 108, 176, 0.4);
+    }
+
+    .refresh-btn:active {
+      transform: translateY(0);
+    }
+
+    .refresh-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .refresh-btn.loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .refresh-btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      left: 50%;
+      margin: -9px 0 0 -9px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .update-notice {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      text-align: center;
+      font-weight: 500;
+      animation: slideIn 0.3s ease;
+    }
+
+    .update-notice.success {
+      background: rgba(56, 161, 105, 0.1);
+      border: 1px solid var(--success-color);
+      color: var(--success-color);
+    }
+
+    .update-notice.error {
+      background: rgba(229, 62, 62, 0.1);
+      border: 1px solid var(--error-color);
+      color: var(--error-color);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feed {
+      padding: 2rem 0;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .article-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+    }
+
+    .article-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .article-title a:hover {
+      color: var(--accent-color);
+    }
+
+    .article-description {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;  /* CHANGED: Show 6 lines instead of 3 */
+      -webkit-box-orient: vertical;
+      line-height: 1.4;       /* ADDED: Better readability for more lines */
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .article-date {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .read-more {
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+    }
+
+    .read-more:hover {
+      gap: 0.5rem;
+    }
+
+    .loading-state, .empty-state, .error-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      grid-column: 1 / -1;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(43, 108, 176, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--accent-color);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+
+    .empty-icon, .error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: var(--text-inverse);
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-content p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .controls-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .last-updated {
+        text-align: center;
+      }
+      
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
 <body>
   <header>
     <div class="container">
@@ -392,6 +740,340 @@
     </div>
   </footer>
 
+  <!-- ... existing HTML ... -->
+<script>
+    // Optimized caching
+    const RSS_CACHE_KEY = 'uscg_rss_cache';
+    const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes (increased)
+
+    // DOM elements (declare once at the top)
+    let refreshBtn, lastUpdatedEl, updateNoticeEl, feedEl;
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    async function loadRSS(showCachedFirst = true) {
+        initializeDOMElements();
+
+        // Show cached immediately if available
+        const cached = getCachedRSS();
+        if (cached && showCachedFirst) {
+            displayArticles(cached.articles);
+            updateLastUpdatedDisplay(cached.timestamp);
+            // If cache is fresh, return early
+            if (Date.now() - cached.timestamp < CACHE_DURATION) {
+                console.log("Using fresh cached data, skipping fetch.");
+                return; // Exit early if cache is still valid
+            }
+        } else if (showCachedFirst) {
+            // Only show loading state if there's no cache initially
+            showLoadingState();
+        }
+
+
+        try {
+            // Clean the feed URL
+            const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss'; // Removed spaces
+            // Use the API without an API key (free tier limitations apply)
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+
+            console.log("Fetching from:", apiUrl); // Debug log
+
+            // Add a timeout using AbortController
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => {
+                console.log("Request timed out!");
+                controller.abort(); // This will cause the fetch to reject
+            }, 15000); // 15 second timeout
+
+            const response = await fetch(apiUrl, { signal: controller.signal });
+            clearTimeout(timeoutId); // Clear timeout if request completes
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Check for API error response
+            if (data.status !== 'ok') {
+                console.error('RSS API Error:', data.message || 'Unknown API error');
+                throw new Error(data.message || 'Error from RSS API');
+            }
+
+            if (!data.items || !Array.isArray(data.items)) {
+                throw new Error('Invalid RSS data format received');
+            }
+
+            // Process articles
+            const articles = data.items.slice(0, 8).map(item => {
+                let pubDate = 'Date not available';
+                if (item.pubDate) {
+                    const parsedDate = new Date(item.pubDate);
+                    if (!isNaN(parsedDate)) {
+                        pubDate = parsedDate.toLocaleDateString('en-US', {
+                            year: 'numeric', month: 'long', day: 'numeric'
+                        });
+                    }
+                }
+
+                let description = item.description || '';
+                description = description.replace(/<[^>]*>/g, '').trim(); // Remove HTML tags and trim whitespace
+                if (description.length > 300) {
+                    description = description.substring(0, 300) + '...';
+                }
+
+                return {
+                    title: item.title || 'No Title',
+                    link: item.link || '#',
+                    description: description,
+                    formattedDate: pubDate
+                };
+            });
+
+            // Cache the successful results
+            const cacheData = {
+                articles: articles,
+                timestamp: Date.now()
+            };
+            cacheRSS(cacheData);
+
+            // Update display with fresh data
+            displayArticles(articles);
+            updateLastUpdatedDisplay(cacheData.timestamp);
+
+            // Show update notice only on manual refresh
+            if (!showCachedFirst) {
+                showUpdateNotice('Alerts updated successfully!', 'success');
+            }
+
+        } catch (error) {
+            console.error('RSS load error:', error);
+
+            // Show error state only if there was no cache to show initially
+            if (!cached && showCachedFirst) {
+                 if (error.name === 'AbortError') {
+                    showErrorState('Request timed out. Please try again later.');
+                 } else {
+                    showErrorState('Failed to load articles. Please try again later.');
+                 }
+            }
+            // If we have cached data but background refresh failed, keep showing cached data silently
+            else if (cached && showCachedFirst) {
+                console.log('Background refresh failed, kept cached data.');
+                // Optionally show a subtle notification to the user that the update failed
+                // showUpdateNotice('Could not update alerts. Showing cached data.', 'error');
+            }
+            // If manual refresh fails, show error notice
+            else if (!showCachedFirst) {
+                if (error.name === 'AbortError') {
+                    showUpdateNotice('Update timed out. Using cached data.', 'error');
+                } else {
+                    showUpdateNotice('Failed to update alerts. Using cached data.', 'error');
+                }
+                // Ensure cached data is displayed after failed manual refresh
+                const currentCached = getCachedRSS();
+                if (currentCached) {
+                    displayArticles(currentCached.articles);
+                    updateLastUpdatedDisplay(currentCached.timestamp);
+                }
+            }
+        } finally {
+            // Always re-enable the button and reset loading state
+            if (refreshBtn) {
+                refreshBtn.disabled = false;
+                refreshBtn.classList.remove('loading');
+                // Restore the original button content
+                refreshBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5 8C13.5 9.15761 13.0589 10.2723 12.2588 11.1173C11.4587 11.9623 10.3546 12.4777 9.175 12.5629C7.99545 12.6481 6.82293 12.2965 5.88873 11.5751C4.95454 10.8538 4.325 9.8125 4.125 8.66667M4.125 8.66667L5.5 10M4.125 8.66667L2.75 7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2.5 8C2.5 6.84239 2.94107 5.7277 3.74118 4.88269C4.54129 4.03768 5.64536 3.52233 6.82491 3.43712C8.00445 3.35191 9.17697 3.70346 10.1112 4.42485C11.0454 5.14625 11.675 6.1875 11.875 7.33333M11.875 7.33333L10.5 6M11.875 7.33333L13.25 8.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Refresh Alerts
+                `;
+            }
+        }
+    }
+
+
+    function initializeDOMElements() {
+        // Only assign if not already assigned (prevents overwriting)
+        if (!refreshBtn) refreshBtn = document.getElementById('refreshBtn');
+        if (!lastUpdatedEl) lastUpdatedEl = document.getElementById('lastUpdated');
+        if (!updateNoticeEl) updateNoticeEl = document.getElementById('updateNotice');
+        if (!feedEl) feedEl = document.getElementById('feed');
+    }
+
+    function showLoadingState() {
+        if (!feedEl) return;
+        feedEl.innerHTML = `
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading latest alerts...</p>
+            </div>
+        `;
+    }
+
+    function showErrorState(message) {
+        if (!feedEl) return;
+        feedEl.innerHTML = `
+            <div class="error-state">
+                <div class="error-icon">?</div> <!-- Changed to actual character -->
+                <p>${message}</p>
+                <button id="retryBtn" class="refresh-btn" style="margin-top: 1rem;">
+                    Try Again
+                </button>
+            </div>
+        `;
+        // Add event listener to the newly created retry button
+        const retryBtn = document.getElementById('retryBtn');
+        if (retryBtn) {
+            retryBtn.addEventListener('click', () => {
+                loadRSS(false); // Call loadRSS with showCachedFirst=false for manual retry
+            });
+        }
+    }
+
+    function displayArticles(articles) {
+        if (!feedEl) return;
+
+        if (!articles || articles.length === 0) {
+            feedEl.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">??</div> <!-- Changed to actual character -->
+                    <p>No alerts available at this time.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Build the HTML string efficiently
+        const articlesHTML = articles.map(item => `
+            <div class="article-card">
+                <div class="article-content">
+                    <h2 class="article-title">
+                        <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+                    </h2>
+                    <p class="article-description">${item.description}</p>
+                    <div class="article-meta">
+                        <div class="article-date">${item.formattedDate}</div>
+                        <a href="${item.link}" class="read-more" target="_blank" rel="noopener noreferrer">
+                            Read more
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        feedEl.innerHTML = articlesHTML;
+    }
+
+    function updateLastUpdatedDisplay(timestamp) {
+        if (!lastUpdatedEl) return;
+
+        if (timestamp) {
+            const date = new Date(timestamp);
+            const timeString = date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            const dateString = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            lastUpdatedEl.innerHTML = `Last updated: ${dateString} at ${timeString}`;
+        } else {
+            lastUpdatedEl.innerHTML = 'Last updated: Unknown';
+        }
+    }
+
+    function showUpdateNotice(message, type = 'success') {
+        if (!updateNoticeEl) return;
+
+        updateNoticeEl.innerHTML = `
+            <div class="update-notice ${type}">
+                ${message}
+            </div>
+        `;
+
+        // Clear notice after 5 seconds
+        setTimeout(() => {
+            if (updateNoticeEl) {
+                updateNoticeEl.innerHTML = '';
+            }
+        }, 5000);
+    }
+
+    function getCachedRSS() {
+        try {
+            const cached = localStorage.getItem(RSS_CACHE_KEY);
+            if (!cached) return null;
+
+            const cacheData = JSON.parse(cached);
+
+            // Check if cache is still valid
+            if (Date.now() - cacheData.timestamp > CACHE_DURATION) {
+                console.log('Cache expired');
+                localStorage.removeItem(RSS_CACHE_KEY); // Remove expired cache
+                return null;
+            }
+            console.log('Cache is valid, using cached data.');
+            return cacheData;
+        } catch (e) {
+            // If cache is corrupted, clear it and return null
+            console.error('Cache error:', e);
+            localStorage.removeItem(RSS_CACHE_KEY);
+            return null;
+        }
+    }
+
+    function cacheRSS(cacheData) {
+        try {
+            // Only cache if articles exist
+            if (cacheData && cacheData.articles && cacheData.articles.length > 0) {
+                localStorage.setItem(RSS_CACHE_KEY, JSON.stringify(cacheData));
+                console.log('Data cached successfully.');
+            }
+        } catch (e) {
+            // Ignore cache errors (e.g., storage full)
+            console.error('Cache save error:', e);
+        }
+    }
+
+    function setupRefreshButton() {
+        refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function() {
+                console.log("Refresh button clicked");
+                // Disable button and show loading state
+                refreshBtn.disabled = true;
+                refreshBtn.classList.add('loading');
+                // Keep the SVG, just change the text
+                const svgContent = refreshBtn.innerHTML.replace(/Refresh Alerts/, '');
+                refreshBtn.innerHTML = svgContent + ' Refreshing...';
+
+                // Load fresh data without showing cached first
+                loadRSS(false);
+            });
+        }
+    }
+
+    // Load RSS after page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM Content Loaded");
+        initializeDOMElements();
+        setupRefreshButton();
+        // Start loading with cached data shown first
+        loadRSS(true);
+    });
+</script>
+</body>
+</html>
   <script>
     // Simple cache implementation
     const RSS_CACHE_KEY = 'uscg_rss_cache';
