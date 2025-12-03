@@ -54,6 +54,30 @@ background:#1a202c;
     color: white;
 	background-color: #2d3748;
 }
+/* Style for dropdown arrow */
+select {
+  /* Your existing styles */
+  width: 100%;
+  font-weight: bold;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: rgb(198, 208, 222);
+  
+  /* New styles for arrow */
+  appearance: none; /* Removes default arrow in modern browsers */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004080' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5rem; /* Makes the arrow larger */
+  padding-right: 3rem; /* Adds space for the larger arrow */
+}
+
+/* For older WebKit browsers (Safari, older Chrome) */
+select::-webkit-expand {
+  display: none; /* Hides default arrow */
+}
 
   </style>
   
@@ -112,9 +136,9 @@ background:#1a202c;
               Hurricane Prediction,
               Weather Radars local doppler & satellite images</h1>
           </div>
-          <hr>
-          <a href="https://www.youtube.com/embed/a2Me0Q5mj04?autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Fishermans Village & WINK" width="48"></a>         
-          <a href="https://www.youtube.com/watch?v=TxtRJFKyvEE&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Cape Weather" width="48"></a>         
+          <hr> 
+          <a href="https://youtu.be/a2Me0Q5mj04?autoplay=1" rel="noopener" target="_blank"><img alt="Cam" src="images/webcam.png" style="margin-right:5px;" title="Thank you Fishermans Village & WINK" width="48"></a>         
+          <a href="https://youtu.be/TxtRJFKyvEE?autoplay=1" rel="noopener" target="_blank"><img alt="Cam" src="images/webcam.png" style="margin-right:5px;" title="Bokelia Thank you Cape Weather!" width="48"></a>         
 <!--      <a href="https://www.youtube.com/embed/bfmpKttSAHw?autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokelia Thank you Cape Weather!" width="48"></a>          
 		            <a href="https://www.ipcamlive.com/5d42fff5d1dab" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Webcam King Fisher Fleet, Punta Gorda, FL" width="48"></a>
 <a href="GasparillaWebcam.htm" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Gasparilla!" width="48"></a>--> 
