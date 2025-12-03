@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Preconnect to critical domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://api.rss2json.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <title>PGSC US Coast Guard News</title>
   <style>
@@ -25,7 +23,7 @@
       --warning-color: #dd6b20;
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --transition: all 0.3s ease;
-	  --card-bg: #f8f9fa; /* Very light gray */
+      --card-bg: #f8f9fa;
     }
 
     * {
@@ -51,7 +49,7 @@
     header {
       background: var(--secondary-color);
       color: var(--text-inverse);
-      padding: 1.2rem 0;
+      padding: 1rem 0;
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
@@ -90,7 +88,7 @@
 
     .controls {
       background: var(--card-bg);
-      padding: 1rem 0;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
@@ -107,7 +105,7 @@
     }
 
     .last-updated {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-light);
     }
 
@@ -115,10 +113,11 @@
       background: var(--secondary-color);
       color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
       font-family: 'Roboto', sans-serif;
+      font-size: 0.9rem;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -169,10 +168,11 @@
     }
 
     .update-notice {
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 4px;
-      margin: 1rem 0;
+      margin: 0.75rem 0;
       text-align: center;
+      font-size: 0.9rem;
       font-weight: 500;
       animation: slideIn 0.3s ease;
     }
@@ -195,43 +195,41 @@
     }
 
     .feed {
-      padding: 2rem 0;
+      padding: 1.5rem 0;
     }
 
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+    /* UPDATED: More compact full-width articles layout */
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 100%;
     }
 
-    .article-card {
+    .article-compact {
       background: var(--card-bg);
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      padding: 1.25rem;
+      border-left: 4px solid var(--accent-color);
     }
 
-    .article-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    .article-compact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px -3px rgba(0, 0, 0, 0.1);
     }
 
-    .article-content {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+    .article-header {
+      margin-bottom: 0;
     }
 
     .article-title {
       font-family: 'Bebas Neue', Arial, sans-serif;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 0;
       color: var(--primary-color);
     }
 
@@ -243,76 +241,71 @@
 
     .article-title a:hover {
       color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    .article-date {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 400;
     }
 
     .article-description {
       color: var(--text-color);
-      margin-bottom: 1rem;
-      flex-grow: 1;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 6;  /* CHANGED: Show 6 lines instead of 3 */
-      -webkit-box-orient: vertical;
-      line-height: 1.4;       /* ADDED: Better readability for more lines */
+      font-size: 0.95rem;
+      line-height: 1.6;
+      white-space: pre-line;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
-    .article-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-color);
+    .article-description p {
+      margin-bottom: 0;
     }
 
-    .article-date {
-      font-size: 0.85rem;
-      color: var(--text-light);
+    .article-description p:last-child {
+      margin-bottom: 0;
     }
 
-    .read-more {
+    .article-description a {
       color: var(--accent-color);
-      font-size: 0.9rem;
-      font-weight: 500;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
+      border-bottom: 1px solid transparent;
       transition: var(--transition);
     }
 
-    .read-more:hover {
-      gap: 0.5rem;
+    .article-description a:hover {
+      border-bottom: 1px solid var(--accent-color);
     }
 
     .loading-state, .empty-state, .error-state {
       text-align: center;
-      padding: 3rem 1rem;
-      grid-column: 1 / -1;
+      padding: 2rem 1rem;
+      width: 100%;
     }
 
     .loading-spinner {
       display: inline-block;
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(43, 108, 176, 0.2);
+      width: 30px;
+      height: 30px;
+      border: 3px solid rgba(43, 108, 176, 0.2);
       border-radius: 50%;
       border-top-color: var(--accent-color);
       animation: spin 1s ease-in-out infinite;
-      margin-bottom: 1rem;
+      margin-bottom: 0;
     }
 
     .empty-icon, .error-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
+      margin-bottom: 0;
       opacity: 0.5;
     }
 
     footer {
       background: var(--primary-color);
       color: var(--text-inverse);
-      padding: 2rem 0;
-      margin-top: 3rem;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
     }
 
     .footer-content {
@@ -320,8 +313,9 @@
     }
 
     .footer-content p {
-      margin: 0.5rem 0;
+      margin: 0.25rem 0;
       opacity: 0.8;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
@@ -333,24 +327,54 @@
       .controls-content {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.75rem;
       }
       
       .last-updated {
         text-align: center;
+        font-size: 0.8rem;
       }
       
-      .articles-grid {
-        grid-template-columns: 1fr;
+      .article-compact {
+        padding: 1rem;
+        margin: 0 -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-bottom: 2px solid var(--border-color);
+        box-shadow: none;
+      }
+      
+      .article-title {
+        font-size: 1.3rem;
+      }
+      
+      .article-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      
+      .feed {
+        padding: 1rem 0;
+      }
+      
+      .articles-list {
+        gap: 1rem;
       }
     }
+	p {
+    display: block;
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
   </style>
 </head>
-
 <body>
   <header>
     <div class="container">
       <div class="header-content">
-        <!-- Optional: Add logo here -->
         <div>
           <h1>Local US Coast Guard Alerts</h1>
         </div>
@@ -377,7 +401,7 @@
     <div id="updateNotice"></div>
 
     <main class="feed">
-      <div id="feed" class="articles-grid">
+      <div id="feed" class="articles-list">
         <div class="loading-state">
           <div class="loading-spinner"></div>
           <p>Loading latest alerts...</p>
@@ -395,336 +419,294 @@
     </div>
   </footer>
 
-<script>
-    // Optimized caching
+  <script>
+    // Simple cache implementation
     const RSS_CACHE_KEY = 'uscg_rss_cache';
-    const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes (increased)
+    const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
-    // DOM elements (declare once at the top)
+    // DOM elements
     let refreshBtn, lastUpdatedEl, updateNoticeEl, feedEl;
 
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     async function loadRSS(showCachedFirst = true) {
-        initializeDOMElements();
+      initializeDOMElements();
+      
+      // Show loading state only on initial load
+      if (showCachedFirst) {
+        showLoadingState();
+      }
+      
+      // Check cache first and display immediately (progressive loading)
+      const cached = getCachedRSS();
+      if (cached && showCachedFirst) {
+        displayArticles(cached.articles);
+        updateLastUpdatedDisplay(cached.timestamp);
+      }
+      
+      // Always try to fetch fresh data in background
+      try {
+        const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
 
-        // Show cached immediately if available
-        const cached = getCachedRSS();
-        if (cached && showCachedFirst) {
-            displayArticles(cached.articles);
-            updateLastUpdatedDisplay(cached.timestamp);
-            // If cache is fresh, return early
-            if (Date.now() - cached.timestamp < CACHE_DURATION) {
-                console.log("Using fresh cached data, skipping fetch.");
-                return; // Exit early if cache is still valid
-            }
-        } else if (showCachedFirst) {
-            // Only show loading state if there's no cache initially
-            showLoadingState();
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-
-        try {
-            // Clean the feed URL
-            const feedUrl = 'https://public.govdelivery.com/topics/USDHSCG_428/feed.rss'; // Removed spaces
-            // Use the API without an API key (free tier limitations apply)
-            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
-
-            console.log("Fetching from:", apiUrl); // Debug log
-
-            // Add a timeout using AbortController
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => {
-                console.log("Request timed out!");
-                controller.abort(); // This will cause the fetch to reject
-            }, 15000); // 15 second timeout
-
-            const response = await fetch(apiUrl, { signal: controller.signal });
-            clearTimeout(timeoutId); // Clear timeout if request completes
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // Check for API error response
-            if (data.status !== 'ok') {
-                console.error('RSS API Error:', data.message || 'Unknown API error');
-                throw new Error(data.message || 'Error from RSS API');
-            }
-
-            if (!data.items || !Array.isArray(data.items)) {
-                throw new Error('Invalid RSS data format received');
-            }
-
-            // Process articles
-            const articles = data.items.slice(0, 8).map(item => {
-                let pubDate = 'Date not available';
-                if (item.pubDate) {
-                    const parsedDate = new Date(item.pubDate);
-                    if (!isNaN(parsedDate)) {
-                        pubDate = parsedDate.toLocaleDateString('en-US', {
-                            year: 'numeric', month: 'long', day: 'numeric'
-                        });
-                    }
-                }
-
-                let description = item.description || '';
-                description = description.replace(/<[^>]*>/g, '').trim(); // Remove HTML tags and trim whitespace
-                if (description.length > 300) {
-                    description = description.substring(0, 300) + '...';
-                }
-
-                return {
-                    title: item.title || 'No Title',
-                    link: item.link || '#',
-                    description: description,
-                    formattedDate: pubDate
-                };
-            });
-
-            // Cache the successful results
-            const cacheData = {
-                articles: articles,
-                timestamp: Date.now()
-            };
-            cacheRSS(cacheData);
-
-            // Update display with fresh data
-            displayArticles(articles);
-            updateLastUpdatedDisplay(cacheData.timestamp);
-
-            // Show update notice only on manual refresh
-            if (!showCachedFirst) {
-                showUpdateNotice('Alerts updated successfully!', 'success');
-            }
-
-        } catch (error) {
-            console.error('RSS load error:', error);
-
-            // Show error state only if there was no cache to show initially
-            if (!cached && showCachedFirst) {
-                 if (error.name === 'AbortError') {
-                    showErrorState('Request timed out. Please try again later.');
-                 } else {
-                    showErrorState('Failed to load articles. Please try again later.');
-                 }
-            }
-            // If we have cached data but background refresh failed, keep showing cached data silently
-            else if (cached && showCachedFirst) {
-                console.log('Background refresh failed, kept cached data.');
-                // Optionally show a subtle notification to the user that the update failed
-                // showUpdateNotice('Could not update alerts. Showing cached data.', 'error');
-            }
-            // If manual refresh fails, show error notice
-            else if (!showCachedFirst) {
-                if (error.name === 'AbortError') {
-                    showUpdateNotice('Update timed out. Using cached data.', 'error');
-                } else {
-                    showUpdateNotice('Failed to update alerts. Using cached data.', 'error');
-                }
-                // Ensure cached data is displayed after failed manual refresh
-                const currentCached = getCachedRSS();
-                if (currentCached) {
-                    displayArticles(currentCached.articles);
-                    updateLastUpdatedDisplay(currentCached.timestamp);
-                }
-            }
-        } finally {
-            // Always re-enable the button and reset loading state
-            if (refreshBtn) {
-                refreshBtn.disabled = false;
-                refreshBtn.classList.remove('loading');
-                // Restore the original button content
-                refreshBtn.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.5 8C13.5 9.15761 13.0589 10.2723 12.2588 11.1173C11.4587 11.9623 10.3546 12.4777 9.175 12.5629C7.99545 12.6481 6.82293 12.2965 5.88873 11.5751C4.95454 10.8538 4.325 9.8125 4.125 8.66667M4.125 8.66667L5.5 10M4.125 8.66667L2.75 7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2.5 8C2.5 6.84239 2.94107 5.7277 3.74118 4.88269C4.54129 4.03768 5.64536 3.52233 6.82491 3.43712C8.00445 3.35191 9.17697 3.70346 10.1112 4.42485C11.0454 5.14625 11.675 6.1875 11.875 7.33333M11.875 7.33333L10.5 6M11.875 7.33333L13.25 8.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Refresh Alerts
-                `;
-            }
+        
+        const data = await response.json();
+        
+        if (!data.items || !Array.isArray(data.items)) {
+          throw new Error('Invalid RSS data format');
         }
+        
+        const articles = [];
+        
+        // Get all items instead of just 8
+        data.items.forEach(item => {
+          let pubDate = 'Date not available';
+          if (item.pubDate) {
+            const parsedDate = new Date(item.pubDate);
+            if (!isNaN(parsedDate)) {
+              pubDate = parsedDate.toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+              });
+            }
+          }
+          
+          // Keep HTML formatting but clean up potentially harmful elements
+          let description = item.description || '';
+          // Basic sanitization - remove script tags and style tags
+          description = description.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+          description = description.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+          description = description.replace(/on\w+="[^"]*"/g, '');
+          description = description.replace(/on\w+='[^']*'/g, '');
+          
+          // Add line breaks and formatting for better readability
+          description = description
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<\/p>/gi, '</p>\n')
+            .replace(/<\/div>/gi, '</div>\n');
+          
+          articles.push({
+            title: item.title,
+            link: item.link,
+            description: description,
+            formattedDate: pubDate
+          });
+        });
+        
+        // Cache the results with current timestamp
+        const cacheData = {
+          articles: articles,
+          timestamp: Date.now()
+        };
+        cacheRSS(cacheData);
+        
+        // Update display with fresh data
+        displayArticles(articles);
+        updateLastUpdatedDisplay(cacheData.timestamp);
+        
+        // Show update notice if this was a manual refresh
+        if (!showCachedFirst) {
+          showUpdateNotice('Alerts updated successfully!', 'success');
+        }
+        
+      } catch (error) {
+        console.error('RSS load error:', error);
+        
+        // If fetch fails and we have no cached data, show error
+        if (!cached && showCachedFirst) {
+          showErrorState('Failed to load articles. Please try again later.');
+        }
+        // If we have cached data but background refresh failed, keep showing cached data silently
+        else if (cached && showCachedFirst) {
+          // Don't show error - just keep cached content visible
+          console.log('Background refresh failed, using cached data');
+        }
+        // If manual refresh fails, show error notice
+        else if (!showCachedFirst) {
+          showUpdateNotice('Failed to update alerts. Using cached data.', 'error');
+          // Make sure we still show the cached data after failed refresh
+          const currentCached = getCachedRSS();
+          if (currentCached) {
+            displayArticles(currentCached.articles);
+            updateLastUpdatedDisplay(currentCached.timestamp);
+          }
+        }
+      } finally {
+        // Re-enable refresh button if it was disabled
+        if (refreshBtn) {
+          refreshBtn.disabled = false;
+          refreshBtn.classList.remove('loading');
+          refreshBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.5 8C13.5 9.15761 13.0589 10.2723 12.2588 11.1173C11.4587 11.9623 10.3546 12.4777 9.175 12.5629C7.99545 12.6481 6.82293 12.2965 5.88873 11.5751C4.95454 10.8538 4.325 9.8125 4.125 8.66667M4.125 8.66667L5.5 10M4.125 8.66667L2.75 7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 8C2.5 6.84239 2.94107 5.7277 3.74118 4.88269C4.54129 4.03768 5.64536 3.52233 6.82491 3.43712C8.00445 3.35191 9.17697 3.70346 10.1112 4.42485C11.0454 5.14625 11.675 6.1875 11.875 7.33333M11.875 7.33333L10.5 6M11.875 7.33333L13.25 8.66667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Refresh Alerts
+          `;
+        }
+      }
     }
 
-
     function initializeDOMElements() {
-        // Only assign if not already assigned (prevents overwriting)
-        if (!refreshBtn) refreshBtn = document.getElementById('refreshBtn');
-        if (!lastUpdatedEl) lastUpdatedEl = document.getElementById('lastUpdated');
-        if (!updateNoticeEl) updateNoticeEl = document.getElementById('updateNotice');
-        if (!feedEl) feedEl = document.getElementById('feed');
+      if (!refreshBtn) refreshBtn = document.getElementById('refreshBtn');
+      if (!lastUpdatedEl) lastUpdatedEl = document.getElementById('lastUpdated');
+      if (!updateNoticeEl) updateNoticeEl = document.getElementById('updateNotice');
+      if (!feedEl) feedEl = document.getElementById('feed');
     }
 
     function showLoadingState() {
-        if (!feedEl) return;
-        feedEl.innerHTML = `
-            <div class="loading-state">
-                <div class="loading-spinner"></div>
-                <p>Loading latest alerts...</p>
-            </div>
-        `;
+      if (!feedEl) return;
+      feedEl.innerHTML = `
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading latest alerts...</p>
+        </div>
+      `;
     }
 
     function showErrorState(message) {
-        if (!feedEl) return;
-        feedEl.innerHTML = `
-            <div class="error-state">
-                <div class="error-icon">?</div> <!-- Changed to actual character -->
-                <p>${message}</p>
-                <button id="retryBtn" class="refresh-btn" style="margin-top: 1rem;">
-                    Try Again
-                </button>
-            </div>
-        `;
-        // Add event listener to the newly created retry button
-        const retryBtn = document.getElementById('retryBtn');
-        if (retryBtn) {
-            retryBtn.addEventListener('click', () => {
-                loadRSS(false); // Call loadRSS with showCachedFirst=false for manual retry
-            });
-        }
+      if (!feedEl) return;
+      feedEl.innerHTML = `
+        <div class="error-state">
+          <div class="error-icon">??</div>
+          <p>${message}</p>
+          <button id="retryBtn" class="refresh-btn" style="margin-top: 1rem;">
+            Try Again
+          </button>
+        </div>
+      `;
+      
+      // Add event listener to retry button
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          loadRSS(false);
+        });
+      }
     }
 
     function displayArticles(articles) {
-        if (!feedEl) return;
-
-        if (!articles || articles.length === 0) {
-            feedEl.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">??</div> <!-- Changed to actual character -->
-                    <p>No alerts available at this time.</p>
-                </div>
-            `;
-            return;
-        }
-
-        // Build the HTML string efficiently
-        const articlesHTML = articles.map(item => `
-            <div class="article-card">
-                <div class="article-content">
-                    <h2 class="article-title">
-                        <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-                    </h2>
-                    <p class="article-description">${item.description}</p>
-                    <div class="article-meta">
-                        <div class="article-date">${item.formattedDate}</div>
-                        <a href="${item.link}" class="read-more" target="_blank" rel="noopener noreferrer">
-                            Read more
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-        feedEl.innerHTML = articlesHTML;
+      if (!feedEl) return;
+      
+      if (!articles || articles.length === 0) {
+        feedEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">??</div>
+            <p>No alerts available at this time.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const articlesHTML = articles.map(item => `
+        <div class="article-compact">
+          <div class="article-header">
+            <h2 class="article-title">
+              <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+            </h2>
+            <div class="article-date">${item.formattedDate}</div>
+          </div>
+          <div class="article-description">${item.description}</div>
+        </div>
+      `).join('');
+      
+      feedEl.innerHTML = articlesHTML;
     }
 
     function updateLastUpdatedDisplay(timestamp) {
-        if (!lastUpdatedEl) return;
-
-        if (timestamp) {
-            const date = new Date(timestamp);
-            const timeString = date.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            });
-            const dateString = date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            lastUpdatedEl.innerHTML = `Last updated: ${dateString} at ${timeString}`;
-        } else {
-            lastUpdatedEl.innerHTML = 'Last updated: Unknown';
-        }
+      if (!lastUpdatedEl) return;
+      
+      if (timestamp) {
+        const date = new Date(timestamp);
+        const timeString = date.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const dateString = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+        lastUpdatedEl.innerHTML = `Last updated: ${dateString} at ${timeString}`;
+      } else {
+        lastUpdatedEl.innerHTML = 'Last updated: Unknown';
+      }
     }
 
     function showUpdateNotice(message, type = 'success') {
-        if (!updateNoticeEl) return;
-
-        updateNoticeEl.innerHTML = `
-            <div class="update-notice ${type}">
-                ${message}
-            </div>
-        `;
-
-        // Clear notice after 5 seconds
-        setTimeout(() => {
-            if (updateNoticeEl) {
-                updateNoticeEl.innerHTML = '';
-            }
-        }, 5000);
+      if (!updateNoticeEl) return;
+      
+      updateNoticeEl.innerHTML = `
+        <div class="update-notice ${type}">
+          ${message}
+        </div>
+      `;
+      
+      // Clear notice after 5 seconds
+      setTimeout(() => {
+        if (updateNoticeEl) {
+          updateNoticeEl.innerHTML = '';
+        }
+      }, 5000);
     }
 
     function getCachedRSS() {
-        try {
-            const cached = localStorage.getItem(RSS_CACHE_KEY);
-            if (!cached) return null;
-
-            const cacheData = JSON.parse(cached);
-
-            // Check if cache is still valid
-            if (Date.now() - cacheData.timestamp > CACHE_DURATION) {
-                console.log('Cache expired');
-                localStorage.removeItem(RSS_CACHE_KEY); // Remove expired cache
-                return null;
-            }
-            console.log('Cache is valid, using cached data.');
-            return cacheData;
-        } catch (e) {
-            // If cache is corrupted, clear it and return null
-            console.error('Cache error:', e);
-            localStorage.removeItem(RSS_CACHE_KEY);
-            return null;
+      try {
+        const cached = localStorage.getItem(RSS_CACHE_KEY);
+        if (!cached) return null;
+        
+        const cacheData = JSON.parse(cached);
+        
+        // Check if cache is still valid
+        if (Date.now() - cacheData.timestamp > CACHE_DURATION) {
+          console.log('Cache expired');
+          return null;
         }
+        
+        return cacheData;
+      } catch (e) {
+        // If cache is corrupted, ignore it
+        console.error('Cache error:', e);
+        return null;
+      }
     }
 
     function cacheRSS(cacheData) {
-        try {
-            // Only cache if articles exist
-            if (cacheData && cacheData.articles && cacheData.articles.length > 0) {
-                localStorage.setItem(RSS_CACHE_KEY, JSON.stringify(cacheData));
-                console.log('Data cached successfully.');
-            }
-        } catch (e) {
-            // Ignore cache errors (e.g., storage full)
-            console.error('Cache save error:', e);
-        }
+      try {
+        localStorage.setItem(RSS_CACHE_KEY, JSON.stringify(cacheData));
+      } catch (e) {
+        // Ignore cache errors
+        console.error('Cache save error:', e);
+      }
     }
 
     function setupRefreshButton() {
-        refreshBtn = document.getElementById('refreshBtn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', function() {
-                console.log("Refresh button clicked");
-                // Disable button and show loading state
-                refreshBtn.disabled = true;
-                refreshBtn.classList.add('loading');
-                // Keep the SVG, just change the text
-                const svgContent = refreshBtn.innerHTML.replace(/Refresh Alerts/, '');
-                refreshBtn.innerHTML = svgContent + ' Refreshing...';
-
-                // Load fresh data without showing cached first
-                loadRSS(false);
-            });
-        }
+      refreshBtn = document.getElementById('refreshBtn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+          // Disable button and show loading state
+          refreshBtn.disabled = true;
+          refreshBtn.classList.add('loading');
+          refreshBtn.textContent = 'Refreshing...';
+          
+          // Load fresh data without showing cached first
+          loadRSS(false);
+        });
+      }
     }
 
     // Load RSS after page loads
     document.addEventListener('DOMContentLoaded', function() {
-        console.log("DOM Content Loaded");
-        initializeDOMElements();
-        setupRefreshButton();
-        // Start loading with cached data shown first
-        loadRSS(true);
+      initializeDOMElements();
+      setupRefreshButton();
+      setTimeout(() => loadRSS(true), 100);
     });
-</script>
+  </script>
 </body>
 </html>
