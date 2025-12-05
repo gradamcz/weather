@@ -1,0 +1,343 @@
+:root {
+    --text-color: #000000;
+    --text-color-inv: #FFFFFF;
+    --text-container-bkgrd: rgba(255, 255, 255, 0.9);
+    --butn-bkgrd: rgb(198, 208, 222);
+    --menu-ftr-bkgrd-colr: 9, 6, 37;
+    --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px
+}
+
+html {
+    box-sizing: border-box
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit
+}
+
+body {
+    font-family: var(--main-font);
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    background: #000000 !important;
+    background-image: none !important;
+    color: white;
+}
+
+h2 {
+    font-family: 'Bebas Neue';
+    font-size: 1.4rem;
+    line-height: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+h1 {
+    font-family: 'Bebas Neue';
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.center {
+    text-align: center
+}
+
+a.button:hover {
+    text-decoration: none;
+    color: var(--text-color-inv)
+}
+
+a.button,
+.load-more {
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 700;
+    background: var(--butn-bkgrd);
+    border: 1px solid #dfdfdf;
+    text-decoration: none;
+    margin: 2px 2px;
+    padding: 10px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / .2), 0 6px 20px 0 rgb(0 0 0 / .19)
+}
+
+img.imgsm {
+    height: 100px;
+    width: 100px;
+    margin-right: 5px;
+    float: left
+}
+
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(var(--menu-ftr-bkgrd-colr), .6);
+    color: var(--text-color-inv);
+    text-align: center;
+    font-size: .8rem;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.nav-links:hover {
+    color: grey;
+    border-radius: .3rem
+}
+
+.navbar {
+    font-size: 1.2rem;
+    background: rgba(var(--menu-ftr-bkgrd-colr), .6)
+}
+
+.main-nav {
+    list-style-type: none;
+    display: none
+}
+
+.nav-links {
+    text-decoration: none;
+    color: var(--text-color-inv);
+    font-weight: 700;
+    padding: 6px 0 6px 0;
+    font-size: 1.2rem
+}
+
+.main-nav li {
+    text-align: center;
+    margin: 1rem auto;
+    padding: 0 0 0 0
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 10px
+}
+
+.navbar-toggle {
+    position: absolute;
+    top: 60px;
+    right: 25px;
+    cursor: pointer;
+    color: var(--text-color-inv);
+    font-size: 1.5rem;
+    font-weight: 800
+}
+
+#chkToggle {
+    display: none
+}
+
+#chkToggle:checked+ul.main-nav {
+    display: block
+}
+
+.container {
+    display: inline-block;
+    cursor: pointer
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px)
+}
+
+.change .bar2 {
+    opacity: 0
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px)
+}
+
+
+/* merged */    
+.DateDiv, .DateRange {
+    display: none;
+}
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.flex-container > div {
+    background-color: var(--text-container-bkgrd);
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+.frame {
+    flex: 1 1 auto;
+    border: 0;
+}
+.item1 {
+    flex-basis: auto;
+    min-width: 370px;
+}
+.item2, .item5 {
+    flex-basis: auto;
+    max-width: 550px;
+}
+.item3, .item4, .item6 {
+    flex-basis: auto;
+    flex: 1 1 auto;
+    overflow: auto;
+}
+.item3 {
+    max-width: 640px;
+}
+.item4 {
+    max-width: 275px;
+}
+.item6 {
+    max-width: 700px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.soflow {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(198, 208, 222);
+    border: 1px solid #aaa;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 5px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
+button {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    background: rgb(198, 208, 222);
+    border-color: #d1d1d1;
+}
+#ModalNotice {
+    visibility: hidden;
+    background-color: rgba(0, 35, 160, 0.9);
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 50px;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    font-size: 17px;
+    margin: 20px auto;
+}
+#ModalNotice.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#modal-content {
+    background-color: #e4e4e4;
+    display: none;
+    margin: 5px;
+    position: absolute;
+    top: 35px;
+    width: 60%;
+    z-index: 1000;
+}
+#modal-content.active {
+    display: block;
+}
+.install-button {
+    display: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 10px auto;
+    transition: background-color 0.2s ease;
+}
+.install-button:hover {
+    background-color: #0056b3;
+}
+.title {
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    color: white;
+}
+/* Merged 2 */
+  .flex-container > div {
+    background-color: #2d3748;
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 2px 0;
+    color: white;
+	background-color: #2d3748;
+}
+/* Style for dropdown arrow */
+select {
+  /* Your existing styles */
+  width: 100%;
+  font-weight: bold;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: rgb(198, 208, 222);
+  
+  /* New styles for arrow */
+  appearance: none; /* Removes default arrow in modern browsers */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004080' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5rem; /* Makes the arrow larger */
+  padding-right: 3rem; /* Adds space for the larger arrow */
+}
+
+/* For older WebKit browsers (Safari, older Chrome) */
+select::-webkit-expand {
+  display: none; /* Hides default arrow */
+}
+
+
