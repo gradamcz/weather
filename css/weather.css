@@ -3,7 +3,6 @@
     --text-color-inv: #FFFFFF;
     --text-container-bkgrd: rgba(255, 255, 255, 0.9);
     --butn-bkgrd: rgb(198, 208, 222);
-    ;
     --menu-ftr-bkgrd-colr: 9, 6, 37;
     --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px
@@ -22,11 +21,11 @@ html {
 body {
     font-family: var(--main-font);
     font-weight: 500;
-    color: var(--text-color);
     padding: 0;
     margin: 0;
-    background: url(../images/bg.jpg) no-repeat center center fixed;
-    background-size: cover
+    background: #000000 !important;
+    background-image: none !important;
+    color: white;
 }
 
 h2 {
@@ -211,10 +210,6 @@ img.imgsm {
         padding: 20px 0 0 0
     }
 /* merged */    
-    body {
-    background: #000000 !important;
-    background-image: none !important;
-}
 .DateDiv, .DateRange {
     display: none;
 }
@@ -350,10 +345,7 @@ button {
     border-radius: 10px;
 }
 
-body {
-color: white;
-background:#1a202c;
-}
+
 .title {
     text-align: center;
     font-size: 30px;
