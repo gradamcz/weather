@@ -169,46 +169,7 @@ img.imgsm {
     transform: rotate(45deg) translate(-8px, -8px)
 }
 
-@media screen and (min-width:768px) {
-    * {
-        box-sizing: border-box
-    }
-    .navbar {
-        display: flex;
-        justify-content: flex-start;
-        padding-bottom: 0;
-        background-color: rgba(var(--menu-ftr-bkgrd-colr), .6);
-        align-items: center
-    }
-    #chkToggle:checked+ul.main-nav {
-        display: flex
-    }
-    .main-nav {
-        display: flex;
-        margin-right: 30px;
-        flex-direction: row
-    }
-    .main-nav li {
-        margin: 0 0 0 0
-    }
-    .nav-links {
-        margin-left: 10px
-    }
-    .logo {
-        margin-top: 0;
-        margin-right: 2.5em
-    }
-    .navbar-toggle {
-        display: none
-    }
-    .nav-links:hover {
-        color: var(--text-color)
-    }
-    ul,
-    li {
-        margin: 0;
-        padding: 20px 0 0 0
-    }
+
 /* merged */    
 .DateDiv, .DateRange {
     display: none;
