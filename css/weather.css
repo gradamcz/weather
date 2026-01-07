@@ -151,3 +151,10 @@ select {
 select::-webkit-expand {
   display: none; /* Hides default arrow */
 }
+.item6 .button {
+  transition: color 0.3s ease-in-out; /* Adjust duration and timing function as needed */
+}
+
+.item6 .button:hover {
+  color: white;
+}
