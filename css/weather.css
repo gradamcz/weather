@@ -73,6 +73,7 @@ button {
     font-weight: 700;
     background: #d1d1d1;
     background-color: rgb(198, 208, 222);
+    border-radius: 4px;
 }
 #ModalNotice {
     visibility: hidden;
