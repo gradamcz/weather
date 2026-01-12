@@ -67,13 +67,18 @@ img {
     width: 250px;
 }
 button {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: .93rem;
     font-weight: 700;
-    background: #d1d1d1;
-    background-color: rgb(198, 208, 222);
+    background: var(--butn-bkgrd);
+    border: 1px solid #dfdfdf;
+    text-decoration: none;
+    margin: 2px 2px;
+    padding: 10px 10px;
     border-radius: 4px;
+    display: inline-block;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / .2),0 6px 20px 0 rgb(0 0 0 / .19)
 }
 #ModalNotice {
     visibility: hidden;
