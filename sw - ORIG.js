@@ -10,7 +10,7 @@ const urls2ToCache = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
+    caches.open(staticCacheName).then(cache => {
       return cache.addAll(urls2ToCache);
     })
   );
