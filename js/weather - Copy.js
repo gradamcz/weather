@@ -56,61 +56,31 @@ document.addEventListener("DOMContentLoaded", showDateDivsByMonth);
 // PWA installation logic
 let deferredPrompt;
 const installButton = document.getElementById('install-button-main');
-const fallbackBanner = document.getElementById('manual-install-banner');
-
-let beforeInstallFired = false;
-
-// Detect standalone mode (already installed)
-function isStandalone() {
-  return window.matchMedia('(display-mode: standalone)').matches ||
-         window.navigator.standalone;
-}
-
-// 1. Listen for beforeinstallprompt (REAL install capability)
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  beforeInstallFired = true;
-
-  // Show your real install button
   if (installButton) {
-    installButton.style.display = 'block';
-    installButton.addEventListener('click', () => {
-      installButton.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(choiceResult => {
-        console.log(choiceResult.outcome === 'accepted' ?
-          'User accepted install' : 'User dismissed install');
-        deferredPrompt = null;
+      installButton.style.display = 'block';
+      installButton.addEventListener('click', () => {
+        installButton.style.display = 'none';
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choiceResult => {
+          console.log(choiceResult.outcome === 'accepted' ? 
+            'User accepted install' : 'User dismissed install');
+          deferredPrompt = null;
+        });
       });
-    });
   }
 });
-
-// 2. If installed, hide everything
 window.addEventListener("appinstalled", () => {
   console.log("PWA installed successfully!");
   if (installButton) installButton.style.display = "none";
-  if (fallbackBanner) fallbackBanner.style.display = "none";
   deferredPrompt = null;
 });
-
-// 3. On load, decide whether to show fallback banner
 window.addEventListener("DOMContentLoaded", () => {
-
-  // If already installed ? hide everything
-  if (isStandalone()) {
+  if (window.matchMedia("(display-mode: standalone)").matches || 
+      window.navigator.standalone) {
     console.log("App is running in standalone mode.");
     if (installButton) installButton.style.display = "none";
-    if (fallbackBanner) fallbackBanner.style.display = "none";
-    return;
   }
-
-  // Wait a moment to see if beforeinstallprompt fires
-  setTimeout(() => {
-    if (!beforeInstallFired) {
-      // Browser blocked the install event ? show fallback
-      if (fallbackBanner) fallbackBanner.style.display = 'block';
-    }
-  }, 1500);
 });
