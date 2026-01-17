@@ -1,5 +1,5 @@
 // External JavaScript for weather site
-// George A updated 2026
+// George A updated 2025
 
 // Swap image function
 function swapImage(imageSrc) {
