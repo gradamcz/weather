@@ -74,12 +74,26 @@
       color: white;
       background-color: #2d3748;
     }
+
+:root {
+  --app-version: "v10";
+}
+
+.version::after {
+  content: var(--app-version);
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+
   </style>
 
 </head>
 
 <body>
-  <div class="title">Boating Weather</div>
+  <div class="title">Boating Weather <span class="version"></span>
+
+</div>
   <button id="install-button-main" class="install-button">Install Weather App</button>
   <noscript>
     <div
