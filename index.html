@@ -109,19 +109,30 @@
         href="https://www.willyweather.com/fl/charlotte-county/charlotte-harbor--gilchrist-bridge.html" rel="nofollow"
         style="height: 20px;position: relative;display: block;margin: -20px 0 0 0;text-indent: -9999em;z-index: 1">Up to
         date weather for Charlotte
-        Harbor-Gilchrist Bridge</a> <a href="https://time.is/Port_Charlotte" id="time_is_link" rel="nofollow"
-        style="font-size:18px;color:white">EDT:</a> <span id="Port_Charlotte_z161"
-        style="font-size:16px;color:white;font-weight: bold"></span>
-      <script src="https://widget.time.is/en.js"></script>
-      <script>
-        time_is_widget.init({
-          Port_Charlotte_z161: {
-            template: "SUN",
-            sun_format: "Sunrise: srhour:srminute AM Sunset: ss12hour:ssminute PM",
-            coords: "26.9761700,-82.0906400"
+        Harbor-Gilchrist Bridge</a> 
+		<span id="sun-times" style="font-size:16px;color:white;font-weight: bold"></span>
+		<script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
+
+        <script>
+          const latitude  = 27.0442;
+          const longitude = -82.2359;
+        
+          const times = SunCalc.getTimes(new Date(), latitude, longitude);
+          const tz = 'America/New_York';
+        
+          function formatTime(date) {
+            return new Intl.DateTimeFormat('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: tz
+            }).format(date);
           }
-        });
-      </script>
+          const sunrise = formatTime(times.sunrise);
+          const sunset  = formatTime(times.sunset);
+          document.getElementById('sun-times').textContent =
+            `EDT: Sunrise: ${sunrise}  Sunset: ${sunset}`;
+        </script>
     </div>
     <div class='item2'>
       <div title="Links below in this box open a new tab or window">
