@@ -52,36 +52,48 @@
       border-radius: 10px;
     }
 
-    body {
-      color: white;
-      background: #1a202c;
-    }
+body {
+  margin: 0; /* REMOVES THE DEFAULT WHITE SPACE AT THE TOP/SIDES */
+  color: white;
+  background: #1a202c;
+}
 
-    .title {
-      text-align: center;
-      font-size: 30px;
-      text-transform: uppercase;
-      margin: 2px 0;
-      color: white;
-      background-color: #2d3748;
-    }
+.title {
+  display: flex;
+  align-items: center;    
+  justify-content: center; 
+  margin: 0;             /* ENSURES THE BAR IS FLUSH TO THE TOP */
+  padding: 10px 20px;    /* Adds internal height to the bar */
+  font-size: 30px;
+  text-transform: uppercase;
+  color: white;
+  background-color: #2d3748;
+  width: 100%;           /* Ensures it spans the full width */
+  box-sizing: border-box; /* Prevents padding from making the bar too wide */
+}
+
+.title-text {
+  flex-grow: 1;
+  text-align: center;
+  /* margin-left: 60px; */ /* Optional: Uncomment to offset the refresh button width */
+}
 
 .refresh-button {
   font-size: 0.8rem;
-  padding: 4px 8px;
-  margin-left: 8px;
+  padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid #718096;
   background: #4a5568;
   color: white;
   cursor: pointer;
-  min-width: 38px;
+  white-space: nowrap;
 }
 
 .refresh-button:hover {
-  background: #2d3748;
+  background: #1a202c;
 }
 
+/* Version styling fix */
 :root {
   --app-version: "v13";
 }
@@ -90,6 +102,7 @@
   content: var(--app-version);
   margin-left: 8px;
   font-size: 11px;
+  text-transform: none; /* Keeps 'v13' from being Uppercase */
 }
 </style>
 
@@ -97,11 +110,12 @@
 
 <body>
 <div class="title">
-  Boating Weather <span class="version"></span>
+  <span class="title-text">
+    Boating Weather <span class="version"></span>
+  </span>
   <button id="refresh-button" class="refresh-button">Refresh</button>
 </div>
 
-</div>
   <button id="install-button-main" class="install-button">Install Weather App</button>
   <noscript>
     <div
