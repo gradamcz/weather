@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="900">
-  <title>GraTech Weather</title>
+  <title>GraTECH Boating Weather</title>
   <!-- Mobile Specific Metas ===================== -->
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="yes" name="mobile-web-app-capable">
@@ -67,7 +66,21 @@
       background-color: #2d3748;
     }
 
-:root {
+.refresh-button {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 6px;
+  border: 1px solid #718096;
+  background: #4a5568;
+  color: white;
+  cursor: pointer;
+  min-width: 38px;
+}
+
+.refresh-button:hover {
+  background: #2d3748;
+}:root {
   --app-version: "v12";
 }
 
@@ -601,6 +614,11 @@
 
   <!-- Place JS at end of body for best performance -->
   <script src="js/weather.js"></script>
+    <script>
+    document.getElementById('refresh-button').addEventListener('click', function () {
+      window.location.reload(true);
+    });
+  </script>
 </body>
 
 </html>
