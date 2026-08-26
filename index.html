@@ -95,7 +95,7 @@ body {
 
 /* Version styling fix */
 :root {
-  --app-version: "v17";
+  --app-version: "v18";
 }
 
 .version::after {
@@ -103,6 +103,73 @@ body {
   margin-left: 8px;
   font-size: 11px;
   text-transform: none; /* Keeps 'v13' from being Uppercase */
+}
+/* Maintain container layout */
+.alternate-btn {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container that sits inside the button without touching outer styles */
+.swap-wrapper {
+  position: relative;
+  display: inline-block;
+  line-height: inherit;
+  font: inherit;
+  color: inherit;
+}
+
+/* Original text keeps natural button size, retains black/dark font */
+.swap-original {
+  display: inline-block;
+  color: inherit;
+  font: inherit;
+  animation: fadeSwapOriginal 3s infinite ease-in-out;
+}
+
+/* NEW label centers cleanly on top using the exact same font/color */
+.swap-new {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #d90429; /* Red accent so users spot it; change to 'inherit' if you want plain black */
+  font: inherit;
+  font-weight: bold;
+  white-space: nowrap;
+  animation: fadeSwapNew 3s infinite ease-in-out;
+}
+
+@keyframes fadeSwapOriginal {
+  0%, 65% {
+    opacity: 1;
+    visibility: visible;
+  }
+  75%, 90% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes fadeSwapNew {
+  0%, 65% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  75%, 90% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: visible;
+  }
 }
 </style>
 
@@ -201,8 +268,8 @@ body {
         <hr>
        
 	<a href="https://g1.ipcamlive.com/player/player.php?alias=5d42fff5d1dab&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Webcam King Fisher Fleet, Punta Gorda, FL" width="48"></a>      
-<a href="https://www.youtube.com/watch?v=elyJZAJ0TS4&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokellia Thank you Cape Weather" width="48"></a>
-        <a href="https://www.youtube.com/watch?v=gsf6BJRMObk&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="StJamesCity Thank you Cape Weather" width="48"></a>
+<a href="https://www.youtube.com/watch?v=1yGtTaJ33jY&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokellia Thank you Cape Weather" width="48"></a>
+        <a href="https://www.youtube.com/watch?v=2TTrhdUYEWw&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="StJamesCity Thank you Cape Weather" width="48"></a>
 
 
         <!--
@@ -241,19 +308,25 @@ body {
         <a class="button" href="https://www.wunderground.com/dashboard/pws/KFLENGLE141" rel="noopener"
           target="_blank" title="Sailing weather">LemonBay</a>
         <hr>
-
+<!-- Replace whatever button/link you want (e.g. Red Tide, PuntaGorda, etc.) -->
+<a href="https://ccbocc.maps.arcgis.com/apps/dashboards/e5f134dac12f41ce989e46e9fa7f4e75#" class="button">
+  <span class="swap-wrapper">
+    <span class="swap-original">ActualTide</span>
+    <span class="swap-new">*N E W*</span>
+  </span>
+</a>
         <!-- <a class="button" href="https://bit.ly/TideMonthly" rel="noopener" target="_blank" title="Graph Tide charts for all months">Graphs</a> -->
         <a class="button" href="https://www.localtides.net/punta-gorda-tide.php" rel="noopener" target="_blank"
           title="click to open tide chart for today">Today</a>
         <a class="button" href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8725520#obs" rel="noopener"
-          target="_blank" title="Fort Myers, Caloosahatchee River">Ft Myers
+          target="_blank" title="Fort Myers, Caloosahatchee River">FtMyers
           Tide</a> <a class="button" href="https://www.marvsweather.com/buoy" rel="noopener" target="_blank"
           title="Forecast Courtesy of Marv, sign up for his reports">Marvs</a>
         <a class="button" href="https://www.passageweather.com/maps/florida/m_region.htm" rel="noopener" target="_blank"
           title="PAssage Weather mobile">Passage
           Wthr</a>
         <a class="button" href="https://gis.myfwc.com/redtidecurrentstatus/" rel="noopener" target="_blank"
-          title="Red Tide">Red Tide</a>
+          title="Red Tide">RedTide</a>
         <a class="button" href="https://experience.arcgis.com/experience/1ef2c961393948f3861d5ec9831250ee/page/Florida" rel="noopener" target="_blank" title="Red Tide">Red Tide
           #2</a>
         <!--            <a class="button" href="http://www.findu.com/cgi-bin/twp67.cgi?call=FW1721&units=nautical&led=0&fcolor=&bgcolor=&rcolor=&acolor=0,0,0&led=0&notext=1" title="Courtesy of PGBA Peace River Marker 4" target="_blank" rel="noopener">Mrk 4</a>
