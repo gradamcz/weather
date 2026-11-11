@@ -2,17 +2,8 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JVB5KQH3C4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-JVB5KQH3C4');
-  </script>
   <meta charset="UTF-8">
-  <title>GraTech Weather</title>
+  <title>GraTECH Boating Weather</title>
   <!-- Mobile Specific Metas ===================== -->
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="yes" name="mobile-web-app-capable">
@@ -61,39 +52,137 @@
       border-radius: 10px;
     }
 
-    body {
-      color: white;
-      background: #1a202c;
-    }
+body {
+  margin: 0; /* REMOVES THE DEFAULT WHITE SPACE AT THE TOP/SIDES */
+  color: white;
+  background: #1a202c;
+}
 
-    .title {
-      text-align: center;
-      font-size: 30px;
-      text-transform: uppercase;
-      margin: 2px 0;
-      color: white;
-      background-color: #2d3748;
-    }
+.title {
+  display: flex;
+  align-items: center;    
+  justify-content: center; 
+  margin: 0;             /* ENSURES THE BAR IS FLUSH TO THE TOP */
+  padding: 10px 20px;    /* Adds internal height to the bar */
+  font-size: 30px;
+  text-transform: uppercase;
+  color: white;
+  background-color: #2d3748;
+  width: 100%;           /* Ensures it spans the full width */
+  box-sizing: border-box; /* Prevents padding from making the bar too wide */
+}
 
+.title-text {
+  flex-grow: 1;
+  text-align: center;
+  /* margin-left: 60px; */ /* Optional: Uncomment to offset the refresh button width */
+}
+
+.refresh-button {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #718096;
+  background: #4a5568;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.refresh-button:hover {
+  background: #1a202c;
+}
+
+/* Version styling fix */
 :root {
-  --app-version: "v10";
+  --app-version: "v19";
 }
 
 .version::after {
   content: var(--app-version);
   margin-left: 8px;
   font-size: 11px;
+  text-transform: none; /* Keeps 'v13' from being Uppercase */
+}
+/* Maintain container layout */
+.alternate-btn {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Container that sits inside the button without touching outer styles */
+.swap-wrapper {
+  position: relative;
+  display: inline-block;
+  line-height: inherit;
+  font: inherit;
+  color: inherit;
+}
 
-  </style>
+/* Original text keeps natural button size, retains black/dark font */
+.swap-original {
+  display: inline-block;
+  color: inherit;
+  font: inherit;
+  animation: fadeSwapOriginal 3s infinite ease-in-out;
+}
+
+/* NEW label centers cleanly on top using the exact same font/color */
+.swap-new {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #d90429; /* Red accent so users spot it; change to 'inherit' if you want plain black */
+  font: inherit;
+  font-weight: bold;
+  white-space: nowrap;
+  animation: fadeSwapNew 3s infinite ease-in-out;
+}
+
+@keyframes fadeSwapOriginal {
+  0%, 65% {
+    opacity: 1;
+    visibility: visible;
+  }
+  75%, 90% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes fadeSwapNew {
+  0%, 65% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  75%, 90% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: visible;
+  }
+}
+</style>
 
 </head>
 
 <body>
-  <div class="title">Boating Weather <span class="version"></span>
-
+<div class="title">
+  <span class="title-text">
+    Boating Weather <span class="version"></span>
+  </span>
+  <button id="refresh-button" class="refresh-button">Refresh</button>
 </div>
+
   <button id="install-button-main" class="install-button">Install Weather App</button>
   <noscript>
     <div
@@ -120,19 +209,30 @@
         href="https://www.willyweather.com/fl/charlotte-county/charlotte-harbor--gilchrist-bridge.html" rel="nofollow"
         style="height: 20px;position: relative;display: block;margin: -20px 0 0 0;text-indent: -9999em;z-index: 1">Up to
         date weather for Charlotte
-        Harbor-Gilchrist Bridge</a> <a href="https://time.is/Port_Charlotte" id="time_is_link" rel="nofollow"
-        style="font-size:18px;color:white">EDT:</a> <span id="Port_Charlotte_z161"
-        style="font-size:16px;color:white;font-weight: bold"></span>
-      <script src="https://widget.time.is/en.js"></script>
-      <script>
-        time_is_widget.init({
-          Port_Charlotte_z161: {
-            template: "SUN",
-            sun_format: "Sunrise: srhour:srminute AM Sunset: ss12hour:ssminute PM",
-            coords: "26.9761700,-82.0906400"
+        Harbor-Gilchrist Bridge</a> 
+		<span id="sun-times" style="font-size:16px;color:white;font-weight: bold"></span>
+		<script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
+
+        <script>
+          const latitude  = 27.0442;
+          const longitude = -82.2359;
+        
+          const times = SunCalc.getTimes(new Date(), latitude, longitude);
+          const tz = 'America/New_York';
+        
+          function formatTime(date) {
+            return new Intl.DateTimeFormat('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: tz
+            }).format(date);
           }
-        });
-      </script>
+          const sunrise = formatTime(times.sunrise);
+          const sunset  = formatTime(times.sunset);
+          document.getElementById('sun-times').textContent =
+            `Sunrise: ${sunrise}   Sunset: ${sunset}`;
+        </script>
     </div>
     <div class='item2'>
       <div title="Links below in this box open a new tab or window">
@@ -167,9 +267,11 @@
         </div>
         <hr>
        
-<a href="https://www.ipcamlive.com/5d42fff5d1dab" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Webcam King Fisher Fleet, Punta Gorda, FL" width="48"></a>
-        <a href="https://www.youtube.com/watch?v=jjV9RV-B1MQ&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokellia Thank you Cape Weather" width="48"></a>
-        <a href="https://www.youtube.com/watch?v=IBAQ-tkzOx4&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="StJamesCity Thank you Cape Weather" width="48"></a>
+	<a href="https://g1.ipcamlive.com/player/player.php?alias=5d42fff5d1dab&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Thank you Webcam King Fisher Fleet, Punta Gorda, FL" width="48"></a>      
+<a href="https://www.youtube.com/watch?v=1yGtTaJ33jY&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Bokellia Thank you Cape Weather" width="48"></a>
+        <a href="https://g1.ipcamlive.com/player/player.php?alias=6899e489626a0&autoplay=1" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="StJamesCity Thank you Cape Weather" width="48"></a>
+       <a href="https://v.angelcam.com/iframe?v=xp2lgk2prn" rel="noopener" target="_blank"><img alt="" src="images/webcam.png" style="margin-right:5px;" title="Fort Myers Beach Thank you Pink Shell" width="48"></a>
+
 
         <!--
  <a href="https://www.youtube.com/embed/a2Me0Q5mj04?autoplay=1" rel="noopener" target="_blank"><img alt=""
@@ -193,9 +295,11 @@
         <a href="https://www.buoyweather.com/#7.18/26.63/-82.35/SWELL" rel="noopener" target="_blank"><img alt=""
             src="images/Animated-Waves.gif" style="margin-right:5px;" title="Waves Forecast" width="48"></a>
         <hr>
-        <a class="button"
+<!--         <a class="button"
           href="https://embed.windy.com/embed2.html?lat=26.813&lon=-82.114&detailLat=37.751&detailLon=-97.822&width=650&height=450&zoom=8&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0F&radarRange=-1"
-          rel="noopener" target="_blank" title="WINDY Animated Wind">Wind</a>
+          rel="noopener" target="_blank" title="WINDY Animated Wind">Wind</a> -->		  
+        <a class="button" href="https://windy.app/map/#c=26.87688,-82.11962&z=11.24" rel="noopener" target="_blank"
+          title="Animated Radar">Wind</a>
         <a class="button" href="https://www.ventusky.com/?p=26.92;-82.49;7&l=radar" rel="noopener" target="_blank"
           title="Animated Radar">Radar</a>
         <a class="button" href="https://www.wunderground.com/dashboard/pws/KFLPUNTA410" rel="noopener"
@@ -205,20 +309,26 @@
         <a class="button" href="https://www.wunderground.com/dashboard/pws/KFLENGLE141" rel="noopener"
           target="_blank" title="Sailing weather">LemonBay</a>
         <hr>
-
+<!-- Replace whatever button/link you want (e.g. Red Tide, PuntaGorda, etc.) -->
+<a href="https://ccbocc.maps.arcgis.com/apps/dashboards/e5f134dac12f41ce989e46e9fa7f4e75#" class="button" title="o convert the dashboard's NAVD88 readings into MLLW, you simply add 1.65 feet to the displayed value.">
+  <span class="swap-wrapper">
+    <span class="swap-original">ActualTide</span>
+    <span class="swap-new">*N E W*</span>
+  </span>
+</a>
         <!-- <a class="button" href="https://bit.ly/TideMonthly" rel="noopener" target="_blank" title="Graph Tide charts for all months">Graphs</a> -->
         <a class="button" href="https://www.localtides.net/punta-gorda-tide.php" rel="noopener" target="_blank"
           title="click to open tide chart for today">Today</a>
         <a class="button" href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8725520#obs" rel="noopener"
-          target="_blank" title="Fort Myers, Caloosahatchee River">Ft Myers
+          target="_blank" title="Fort Myers, Caloosahatchee River">FtMyers
           Tide</a> <a class="button" href="https://www.marvsweather.com/buoy" rel="noopener" target="_blank"
           title="Forecast Courtesy of Marv, sign up for his reports">Marvs</a>
         <a class="button" href="https://www.passageweather.com/maps/florida/m_region.htm" rel="noopener" target="_blank"
           title="PAssage Weather mobile">Passage
           Wthr</a>
         <a class="button" href="https://gis.myfwc.com/redtidecurrentstatus/" rel="noopener" target="_blank"
-          title="Red Tide">Red Tide</a>
-        <a class="button" href="https://habforecast.gcoos.org/" rel="noopener" target="_blank" title="Red Tide">Red Tide
+          title="Red Tide">RedTide</a>
+        <a class="button" href="https://experience.arcgis.com/experience/1ef2c961393948f3861d5ec9831250ee/page/Florida" rel="noopener" target="_blank" title="Red Tide">Red Tide
           #2</a>
         <!--            <a class="button" href="http://www.findu.com/cgi-bin/twp67.cgi?call=FW1721&units=nautical&led=0&fcolor=&bgcolor=&rcolor=&acolor=0,0,0&led=0&notext=1" title="Courtesy of PGBA Peace River Marker 4" target="_blank" rel="noopener">Mrk 4</a>
          <a class="button" href="http://www.findu.com/cgi-bin/twp67.cgi?call=GW1876&units=nautical&led=0&fcolor=&bgcolor=&rcolor=&acolor=0,0,0&led=0&notext=1" title="Courtesy of PGBA Peace River Marker 2" target="_blank" rel="noopener">Mrk 2</a>
@@ -314,6 +424,10 @@
             value="https://www.windfinder.com/widget/forecast/lemon_bay?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
             Lemon Bay
           </option>
+           <option
+            value="https://www.windfinder.com/widget/forecast/don-pedro-island_englewood?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
+            Don Pedro
+          </option>
           <option
             value="https://www.windfinder.com/widget/forecast/punta_gorda_charlotte_harbor?show_pressure=0&unit_temperature=f&show_day=1&show_rain=1&unit_rain=in&unit_wind=kts">
             Punta Gorda - Charlotte Harbor
@@ -374,11 +488,12 @@
             value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=500&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Venice Beach&activity=Sail&app=sailflow">
             Venice Beach
           </option>
-          <!--             <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=572317&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 2&activity=Sail&app=sailflow">
+          <!--
+            <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=572317&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 2&activity=Sail&app=sailflow">
               Marker 2            </option>
             <option title="Present Wind" value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=187112&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=CH Marker 4&activity=Sail&app=sailflow">
               Marker 4
-            </option>-->
+            </option> -->
           <option title="Present Wind"
             value="https://widgets.windalert.com/widgets/web/currentConditions?spot_id=20123&units_wind=kts&units_temp=F&width=200&height=300&include_fx=false&color=ACACAC&name=Charlotte Hrbr CHYC&activity=Sail&app=sailflow">
             Charlotte Hrbr
@@ -510,8 +625,12 @@
             onclick="swapImage('https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/dynamic/wbbh/nbc2_watervapor_web.jpg?crop=1xw:1xh;center,top&resize=900:*')"
             title="Water Vapor">Vapor</button>
           <!-- 	    <button class="button" onclick="swapImage('https://s.w-x.co/staticmaps/DCT_SPECIAL17_1280x720.jpg')" title="Saharan Dust">Dust</button> -->
-          <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/noaa/noaad1.gif?1576417172')"
-            title="Forecast Prediction 24hrs">Prediction</button>
+          <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/noaa/noaad1.gif')"
+            title="Forecast Prediction Today">Day1</button>
+          <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/noaa/noaad2.gif')"
+            title="Forecast Prediction Tomorrow">Day2</button>
+          <button class="button" onclick="swapImage('https://www.wpc.ncep.noaa.gov/noaa/noaad3.gif')"
+            title="Forecast Prediction Following Day">Day3</button>
           <button class="button" onclick="swapImage('https://www.weather.gov/images/tbw/graphicast/Today.png')"
             title="Rain Forecast">Today</button>
           <button class="button" onclick="swapImage('https://www.weather.gov/images/tbw/graphicast/Tonight.png')"
@@ -546,15 +665,20 @@
       <!-- Put in months range to display Hurricane info -->
       <div class="flex-container">
         <div class='item6'>
+
           <a href="https://www.nhc.noaa.gov/text/refresh/MIATWDAT+shtml/261033.shtml?text" rel="noopener"
             target="_blank" title="Click for more details"><img alt="Image not available"
               src="https://www.nhc.noaa.gov/xgtwo/two_atl_7d0.png"></a>
           <a class="button" href="https://www.nhc.noaa.gov/" rel="noopener" target="_blank"
             title="Tropical weather outlook NOAA">NHC</a>
+          <a class="button" href="https://deepmind.google.com/science/weatherlab" rel="noopener" target="_blank"
+            title="Google Deepmind weather outlook">Google</a>
           <a class="button" href="https://www.tropicaltidbits.com/storminfo/" rel="noopener" target="_blank"
             title="Tropical Tidbits">Trop Tidbits</a>
           <a class="button" href="https://www.cyclocane.com/spaghetti-models/" rel="noopener" target="_blank"
             title="SpaghettiModels">Cyclo</a>
+          <a class="button" href="https://polarwx.com/tropical" rel="noopener" target="_blank"
+            title="Weather Nerds">Polwx</a>
           <a class="button" href="https://www.weathernerds.org/tc_guidance/tcs.html" rel="noopener" target="_blank"
             title="Weather Nerds">WNerds</a>
           <a class="button" href="https://spaghettimodels.com/" rel="noopener" target="_blank"
@@ -592,6 +716,11 @@
 
   <!-- Place JS at end of body for best performance -->
   <script src="js/weather.js"></script>
+    <script>
+    document.getElementById('refresh-button').addEventListener('click', function () {
+      window.location.reload(true);
+    });
+  </script>
 </body>
 
 </html>
