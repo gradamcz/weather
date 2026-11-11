@@ -535,14 +535,14 @@ body {
           style="border:0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12)"
           title="Punta Gorda, Charlotte Harbor tide chart"></iframe>
         <p style="font:12px sans-serif;margin:4px 0 0;color:white;">
-          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor" style="color:white;">More Details</a>
-          by <a href="https://freetides.com/" style="color:white;">FreeTides.com</a>
+          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor" style="color:white;" target="_blank" rel="noopener">More Details</a>
+          by <a href="https://freetides.com/" style="color:white;" target="_blank" rel="noopener">FreeTides.com</a>
         </p>
         <form id="change1" name="change1">
           <select class="soflow" name="options"
-            onchange="var opt=this.options[this.selectedIndex]; var name=opt.getAttribute('data-name')||opt.text.trim(); document.getElementById('youriframe').src='https://freetides.com/widget/'+opt.value; document.getElementById('youriframe').title=name+' tide chart'; var link=document.getElementById('tidelink'); link.href='https://freetides.com/'+opt.value; link.textContent=name+' tide times';"
+            onchange="var val=this.options[this.selectedIndex].value; document.getElementById('youriframe').src='https://freetides.com/widget/'+val; var link=document.getElementById('tidelink'); link.href='https://freetides.com/'+val; link.textContent='More Details';"
             title="Click dropdown menu for new location">
-            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor" data-name="Punta Gorda, Charlotte Harbor">
+            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor">
               Select A Location. . .
             </option>
             <option value="florida/gulf-coast-cont/dunedin-st-joseph-sound">
