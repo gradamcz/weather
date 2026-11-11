@@ -528,21 +528,21 @@ body {
       </form>
     </div>
 <div class='item5'>
-      <div title="Select a location from the dropdown menu for tide charts">
+      <div title="Click dropdown menu for new location">
         <iframe id="youriframe" name="youriframe"
           src="https://freetides.com/widget/florida/charlotte-harbor/punta-gorda-charlotte-harbor"
           width="300" height="250" loading="lazy"
           style="border:0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12)"
           title="Punta Gorda, Charlotte Harbor tide chart"></iframe>
-        <p style="font:12px sans-serif;margin:4px 0 6px">
-          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor" target="_blank" rel="noopener">Punta Gorda, Charlotte Harbor tide times</a>
-          by <a href="https://freetides.com/" target="_blank" rel="noopener">FreeTides.com</a>
+        <p style="font:12px sans-serif;margin:4px 0 0;color:white;">
+          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor" style="color:white;">More Details</a>
+          by <a href="https://freetides.com/" style="color:white;">FreeTides.com</a>
         </p>
         <form id="change1" name="change1">
           <select class="soflow" name="options"
-            onchange="var s=this.options[this.selectedIndex]; document.getElementById('youriframe').src='https://freetides.com/widget/'+s.value; var l=document.getElementById('tidelink'); l.href='https://freetides.com/'+s.value; l.textContent=s.text.trim()+' tide times';"
+            onchange="var opt=this.options[this.selectedIndex]; var name=opt.getAttribute('data-name')||opt.text.trim(); document.getElementById('youriframe').src='https://freetides.com/widget/'+opt.value; document.getElementById('youriframe').title=name+' tide chart'; var link=document.getElementById('tidelink'); link.href='https://freetides.com/'+opt.value; link.textContent=name+' tide times';"
             title="Click dropdown menu for new location">
-            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor">
+            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor" data-name="Punta Gorda, Charlotte Harbor">
               Select A Location. . .
             </option>
             <option value="florida/gulf-coast-cont/dunedin-st-joseph-sound">
@@ -569,11 +569,14 @@ body {
             <option value="florida/charlotte-harbor/matlacha-pass-bascule-bridge">
               Matlacha
             </option>
-            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor">
+            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor" data-name="Punta Gorda, Charlotte Harbor">
               Punta Gorda
             </option>
             <option value="florida/charlotte-harbor/port-boca-grande-charlotte-harbor">
               Boca Grande
+            </option>
+            <option value="florida/caloosahatchee-river/fort-myers">
+              Ft Myers City
             </option>
             <option value="florida/charlotte-harbor/matanzas-pass-fixed-bridge-estero-island">
               Matanzas Pass
@@ -597,6 +600,7 @@ body {
         </form>
       </div>
     </div>
+
 	   <div class='item6'>
       <img style="max-height:375px;min-width:98%;" alt="Image not available" id="change-image"
         src="https://s.w-x.co/staticmaps/wu/wxtype/county_loc/pie/animate.png">

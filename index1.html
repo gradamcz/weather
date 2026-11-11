@@ -534,10 +534,11 @@ body {
           width="300" height="250" loading="lazy"
           style="border:0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12)"
           title="Punta Gorda, Charlotte Harbor tide chart"></iframe>
-        <p style="font:12px sans-serif;margin:4px 0 0">
-          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor">Punta Gorda, Charlotte Harbor tide times</a>
-          by <a href="https://freetides.com/">FreeTides.com</a>
+        <p style="font:12px sans-serif;margin:4px 0 0;color:white;">
+          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor" style="color:white;">More Details</a>
+          by <a href="https://freetides.com/" style="color:white;">FreeTides.com</a>
         </p>
+		<br>
         <form id="change1" name="change1">
           <select class="soflow" name="options"
             onchange="var opt=this.options[this.selectedIndex]; var name=opt.getAttribute('data-name')||opt.text.trim(); document.getElementById('youriframe').src='https://freetides.com/widget/'+opt.value; document.getElementById('youriframe').title=name+' tide chart'; var link=document.getElementById('tidelink'); link.href='https://freetides.com/'+opt.value; link.textContent=name+' tide times';"
@@ -574,6 +575,9 @@ body {
             </option>
             <option value="florida/charlotte-harbor/port-boca-grande-charlotte-harbor">
               Boca Grande
+            </option>
+            <option value="florida/caloosahatchee-river/fort-myers">
+              Ft Myers City
             </option>
             <option value="florida/charlotte-harbor/matanzas-pass-fixed-bridge-estero-island">
               Matanzas Pass
