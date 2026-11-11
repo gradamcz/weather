@@ -527,89 +527,78 @@ body {
         </select>
       </form>
     </div>
-    <div class='item5'>
-      <div title="Drag Circle for time at spot, use + or - to change days Thank you Tidegraph for the widget">
-        <iframe loading="lazy" sandbox="allow-scripts  allow-same-origin " allowfullscreen height="450" id="youriframe"
-          name="youriframe"
-          src="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=.9&lat=26.9333&lng=-82.0667"
-          title="Drag Circle for time at spot, use + or - to change days" width="300" style="border:none;"></iframe>
+<div class='item5'>
+      <div title="Click dropdown menu for new location">
+        <iframe id="youriframe" name="youriframe"
+          src="https://freetides.com/widget/florida/charlotte-harbor/punta-gorda-charlotte-harbor"
+          width="300" height="250" loading="lazy"
+          style="border:0;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12)"
+          title="Punta Gorda, Charlotte Harbor tide chart"></iframe>
+        <p style="font:12px sans-serif;margin:4px 0 0">
+          <a id="tidelink" href="https://freetides.com/florida/charlotte-harbor/punta-gorda-charlotte-harbor">Punta Gorda, Charlotte Harbor tide times</a>
+          by <a href="https://freetides.com/">FreeTides.com</a>
+        </p>
         <form id="change1" name="change1">
           <select class="soflow" name="options"
-            onchange="document.getElementById('youriframe').src = this.options[this.selectedIndex].value"
+            onchange="var opt=this.options[this.selectedIndex]; var name=opt.getAttribute('data-name')||opt.text.trim(); document.getElementById('youriframe').src='https://freetides.com/widget/'+opt.value; document.getElementById('youriframe').title=name+' tide chart'; var link=document.getElementById('tidelink'); link.href='https://freetides.com/'+opt.value; link.textContent=name+' tide times';"
             title="Click dropdown menu for new location">
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&lat=26.9333&lng=-82.0667">
+            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor" data-name="Punta Gorda, Charlotte Harbor">
               Select A Location. . .
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Dunedin, St. Joseph Sound, Florida">
+            <option value="florida/gulf-coast-cont/dunedin-st-joseph-sound">
               Dunedin, St. Joseph Sound
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Clearwater, Florida">
+            <option value="florida/gulf-coast-cont/clearwater">
               Clearwater
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=St. Petersburg, Tampa Bay">
+            <option value="florida/tampa-bay/st-petersburg">
               St. Petersburg
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Sarasota, Sarasota Bay, Florida">
+            <option value="florida/charlotte-harbor/sarasota-sarasota-bay">
               Sarasota Bay
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Venice Inlet (inside), Florida">
+            <option value="florida/charlotte-harbor/venice-inlet-inside">
               Venice Inlet (inside)
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Englewood, Lemon Bay, Florida">
+            <option value="florida/charlotte-harbor/englewood-lemon-bay">
               Lemon Bay
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Placida, Gasparilla Sound, Florida">
+            <option value="florida/charlotte-harbor/placida-gasparilla-sound">
               Placida
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Matlacha%20Pass%20%28bascule%20bridge%29,%20fl">
+            <option value="florida/charlotte-harbor/matlacha-pass-bascule-bridge">
               Matlacha
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&lat=26.9333&lng=-82.0667">
+            <option value="florida/charlotte-harbor/punta-gorda-charlotte-harbor" data-name="Punta Gorda, Charlotte Harbor">
               Punta Gorda
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Port Boca Grande, Charlotte Harbor, Florida">
+            <option value="florida/charlotte-harbor/port-boca-grande-charlotte-harbor">
               Boca Grande
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Matanzas Pass (fixed bridge) Estero Island, Florida">
+            <option value="florida/charlotte-harbor/matanzas-pass-fixed-bridge-estero-island">
               Matanzas Pass
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Iona Shores, Caloosahatchee River, Florida">
+            <option value="florida/caloosahatchee-river/iona-shores">
               Iona Shores
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Naples, Naples Bay, north end, Florida">
+            <option value="florida/charlotte-harbor/naples-naples-bay-north-end">
               Naples Bay, north end
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Marco, Big Marco River, Florida">
+            <option value="florida/charlotte-harbor/marco-big-marco-river">
               Big Marco River
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Shark River entrance, Florida">
+            <option value="florida/charlotte-harbor/shark-river-entrance">
               Shark River entrance
             </option>
-            <option
-              value="https://tides.tidegraph.com/api/tidegraph.php?bg=LightGrey&scale=0.9&station=Boot Key Harbor bridge, Boot Key, Florida">
+            <option value="florida/florida-keys/boot-key-harbor-bridge-boot-key">
               Boot Key Harbor bridge
             </option>
           </select>
         </form>
       </div>
     </div>
-    <div class='item6'>
+
+	   <div class='item6'>
       <img style="max-height:375px;min-width:98%;" alt="Image not available" id="change-image"
         src="https://s.w-x.co/staticmaps/wu/wxtype/county_loc/pie/animate.png">
       <div id="div2" style="display: block;">
